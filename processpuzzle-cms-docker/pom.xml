@@ -1,0 +1,137 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>processpuzzle-cms-docker</artifactId>
+  <packaging>pom</packaging>
+  <name>ProcessPuzzle CMS - Docker</name>
+
+  <parent>
+    <groupId>com.processpuzzle.cms</groupId>
+    <artifactId>processpuzzle-cms-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../processpuzzle-cms-parent</relativePath>
+  </parent>
+
+  <properties>
+    <docker.push.retries>30</docker.push.retries>
+    <ui.server.jar>processpuzzle-cms-ui-server.jar</ui.server.jar>
+    <container.working.dir>/data</container.working.dir>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.processpuzzle.cms</groupId>
+      <artifactId>processpuzzle-cms-ui-server</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>${docker.maven.plugin.version}</version>
+        <extensions>true</extensions> <!-- enables using 'docker' packaging above -->
+        <configuration>
+          <watchInterval>500</watchInterval>
+          <logDate>default</logDate>
+          <verbose>true</verbose>
+          <autoPull>always</autoPull>
+          <watchPostGoal>org.apache.maven.plugins:maven-help-plugin:help</watchPostGoal>
+          <images>
+            <image>
+              <alias>processpuzzle-cms</alias>
+              <name>zsuffazs/processpuzzle-cms:latest</name>
+              <build>
+                <from>ubuntu:latest</from>
+                <tags>
+                  <tag>${project.version}</tag>
+                </tags>
+                <maintainer>zsolt.zsuffa@gmail.com</maintainer>
+                <workdir>${container.working.dir}</workdir>
+                <assembly>
+                  <basedir>${container.working.dir}</basedir>
+                  <mode>dir</mode>
+                  <inline xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+                    <id>server-jar</id>
+                    <fileSets>
+                      <fileSet>
+                        <directory>${project.basedir}/../processpuzzle-cms-ui-server/target</directory>
+                        <includes>
+                          <include>${ui.server.jar}</include>
+                        </includes>
+                        <outputDirectory>.</outputDirectory>
+                      </fileSet>
+                    </fileSets>
+                  </inline>
+                </assembly>
+                <runCmds>
+                  <runCmd>apt-get update</runCmd>
+                  <runCmd>apt-get install -y software-properties-common</runCmd>
+                  <runCmd>echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections</runCmd>
+                  <runCmd>add-apt-repository -y ppa:webupd8team/java</runCmd>
+                  <runCmd>apt-get update</runCmd>
+                  <runCmd>apt-get install -y oracle-java8-installer</runCmd>
+                  <runCmd>rm -rf /var/lib/apt/lists/*</runCmd>
+                  <runCmd>rm -rf /var/cache/oracle-jdk8-installer</runCmd>
+                </runCmds>
+                <env>
+                  <JAVA_HOME>/usr/lib/jvm/java-8-oracle</JAVA_HOME>
+                </env>
+                <ports>
+                  <port>9125</port>
+                </ports>
+                <cmd>java -jar ${ui.server.jar}</cmd>
+              </build>
+
+              <run>
+                <ports>
+                  <port>9125:9125</port>
+                </ports>
+                <log>
+                  <enabled>true</enabled>
+                </log>
+                <wait>
+                  <http>
+                    <url>http://localhost:9125</url>
+                    <method>GET</method>
+                    <status>200..399</status>
+                  </http>
+                  <time>30000</time>
+                </wait>
+                <cmd>java -jar ${ui.server.jar}</cmd>
+              </run>
+            </image>
+          </images>
+        </configuration>
+
+        <executions>
+          <execution>
+            <id>build-start</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>build</goal>
+              <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stop</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>deploy</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>push</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

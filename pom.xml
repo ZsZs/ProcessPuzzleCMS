@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>processpuzzle-cms</artifactId>
+  <name>ProcessPuzzle CMS - Modules</name>
+  <packaging>pom</packaging>
+
+  <parent>
+    <groupId>com.processpuzzle.cms</groupId>
+    <artifactId>processpuzzle-cms-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>processpuzzle-cms-parent</relativePath>
+  </parent>
+
+  <modules>
+    <module>processpuzzle-cms-parent</module>
+    <module>processpuzzle-cms-ui</module>
+    <module>processpuzzle-cms-ui-server</module>
+    <module>processpuzzle-cms-docker</module>
+    <module>processpuzzle-cms-aws</module>
+  </modules>
+</project>
