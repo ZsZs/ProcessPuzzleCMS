@@ -10,5 +10,4 @@ export const environment = {
     host: 'localhost:9124',
     contextPath: 'api'
   }
-
 };

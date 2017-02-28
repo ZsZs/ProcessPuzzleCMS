@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-dev": "ng build --prod --aot --environment=dev",
+    "build-dev": "ng build --dev --environment=dev",
     "build-prod": "ng build --prod --aot --environment=prod"
   },
   "private": true,

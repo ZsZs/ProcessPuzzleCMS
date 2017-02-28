@@ -5,6 +5,7 @@ import {Router, ActivatedRoute} from "@angular/router";
 import {NavigationBar} from "./navigation-bar";
 import {NavigationBarService} from "./navigation-bar.service";
 import {Desktop} from "../desktop";
+import {MaterializeAction} from "angular2-materialize";
 
 @Component({
   selector: 'pp-navigation-bar-editor',
@@ -12,7 +13,7 @@ import {Desktop} from "../desktop";
 })
 
 export class NavigationBarEditorComponent implements AfterViewInit, OnInit {
-  @ViewChild('childModal') public childModal:ModalDirective;
+  modalActions = new EventEmitter<string|MaterializeAction>();
   public navbarEditForm: FormGroup;
   navigationBar: NavigationBar;
 
@@ -23,7 +24,7 @@ export class NavigationBarEditorComponent implements AfterViewInit, OnInit {
 
   // public accessors and mutators
   ngAfterViewInit(){
-    this.showChildModal();
+    this.openForm();
   }
 
   ngOnInit() {
@@ -32,12 +33,12 @@ export class NavigationBarEditorComponent implements AfterViewInit, OnInit {
   }
 
   onCancel() {
-    this.childModal.hide();
+    this.closeForm();
     this.navigateBack();
   }
 
   onDelete() {
-    this.childModal.hide();
+    this.closeForm();
     this.desktop.deleteNavigationBar();
     this.navigateBack();
   }
@@ -45,14 +46,15 @@ export class NavigationBarEditorComponent implements AfterViewInit, OnInit {
   onSubmit() {
     this.navigationBar = this.navbarEditForm.value;
     this.desktop.updateNavigationBar( this.navigationBar );
+    this.closeForm();
     this.navigateBack();
   }
 
-  public showChildModal():void {
-    this.childModal.show();
+  // protected, private helper methods
+  private closeForm(): void{
+    this.modalActions.emit({action:"modal",params:['close']});
   }
 
-  // protected, private helper methods
   private initForm() {
     this.navbarEditForm = this.formBuilder.group({
       brand: [this.navigationBar ? this.navigationBar.brand : null, Validators.required]
@@ -61,6 +63,10 @@ export class NavigationBarEditorComponent implements AfterViewInit, OnInit {
 
   private navigateBack() {
     this.router.navigate( ['../../'] );
+  }
+
+  private openForm():void {
+    this.modalActions.emit({action:"modal",params:['open']});
   }
 
   private updateForm() {

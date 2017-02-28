@@ -19,6 +19,8 @@ import { NavigationBarEditorComponent } from './desktop-editor/navigation-bar/na
 import { BreadCrumbComponent } from './desktop-editor/bread-crumb/bread-crumb.component';
 import { BreadCrumbEditorComponent } from './desktop-editor/bread-crumb/bread-crumb-editor.component';
 import { IntroComponent } from './intro.component';
+import { FooterComponent } from './desktop-editor/footer/footer.component';
+import { FooterEditorComponent } from './desktop-editor/footer/footer-editor.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { IntroComponent } from './intro.component';
     NavigationBarComponent,
     BreadCrumbComponent,
     BreadCrumbEditorComponent,
-    IntroComponent
+    IntroComponent,
+    FooterComponent,
+    FooterEditorComponent
   ],
   imports: [
     BrowserModule,

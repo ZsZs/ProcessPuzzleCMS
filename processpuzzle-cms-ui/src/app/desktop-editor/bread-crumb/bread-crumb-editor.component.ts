@@ -1,16 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, EventEmitter} from '@angular/core';
 import {FormControl, Validators, FormGroup, FormBuilder} from "@angular/forms";
 import {ModalDirective} from "ng2-bootstrap";
 import {Router} from "@angular/router";
 import {Desktop} from "../desktop";
 import {BreadCrumb} from "./bread-crumb";
+import {MaterializeAction} from "angular2-materialize";
 
 @Component({
   selector: 'pp-bread-crumb-editor',
   templateUrl: './bread-crumb-editor.component.html'
 })
 export class BreadCrumbEditorComponent implements OnInit {
-  @ViewChild('childModal') public childModal:ModalDirective;
+  modalActions = new EventEmitter<string|MaterializeAction>();
   public breadCrumbEditForm: FormGroup;
   breadCrumb: BreadCrumb;
 
@@ -21,7 +22,7 @@ export class BreadCrumbEditorComponent implements OnInit {
 
   // public accessors and mutators
   ngAfterViewInit(){
-    this.showChildModal();
+    this.openForm();
   }
 
   ngOnInit() {
@@ -30,12 +31,12 @@ export class BreadCrumbEditorComponent implements OnInit {
   }
 
   onCancel() {
-    this.childModal.hide();
+    this.closeForm();
     this.navigateBack();
   }
 
   onDelete() {
-    this.childModal.hide();
+    this.closeForm();
     this.desktop.deleteBreadCrumb();
     this.navigateBack();
   }
@@ -43,14 +44,15 @@ export class BreadCrumbEditorComponent implements OnInit {
   onSubmit() {
     this.breadCrumb = this.breadCrumbEditForm.value;
     this.desktop.updateBreadCrumb( this.breadCrumb );
+    this.closeForm();
     this.navigateBack();
   }
 
-  public showChildModal():void {
-    this.childModal.show();
+  // protected, private helper methods
+  private closeForm(){
+    this.modalActions.emit({action:"modal",params:['close']});
   }
 
-  // protected, private helper methods
   private initForm() {
     this.breadCrumbEditForm = this.formBuilder.group({
 //      brand: [this.breadCrumb ? this.breadCrumb.brand : null, Validators.required]
@@ -60,6 +62,11 @@ export class BreadCrumbEditorComponent implements OnInit {
   private navigateBack() {
     this.router.navigate( ['../../'] );
   }
+
+  private openForm():void {
+  this.modalActions.emit({action:"modal",params:['open']});
+  }
+
 
   private updateForm() {
 //    (<FormControl>this.breadCrumbEditForm.controls['brand']).setValue( this.breadCrumb.brand, { onlySelf: true });

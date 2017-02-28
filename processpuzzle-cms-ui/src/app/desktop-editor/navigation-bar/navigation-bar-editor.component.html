@@ -1,23 +1,16 @@
-<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+<div id="navigation-bar-editor" materialize="modal" [materializeActions]="modalActions" class="modal modal-fixed-footer">
+  <form [formGroup]="navbarEditForm" (ngSubmit)="onSubmit()">
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">Edit Navigation Bar</h4>
-        <button type="button" class="close pull-right" aria-label="Close" (click)="onCancel()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="navbarEditForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="brand">Brand</label>
-            <input type="text" class="form-control" id="brand" formControlName="brand" placeholder="Brand">
-          </div>
-          <button type="submit" class="btn btn-success" [disabled]="!navbarEditForm.valid">Save</button>
-          <button class="btn btn-danger" (click)="onDelete()">Delete</button>
-          <a class="btn btn-info" (click)="onCancel()">Cancel</a>
-        </form>
-      </div>
+      <h4>Edit Navigation Bar</h4>
+        <div class="form-group">
+          <label for="brand">Brand</label>
+          <input type="text" class="form-control" id="brand" formControlName="brand" placeholder="Brand">
+        </div>
     </div>
-  </div>
+    <div class="modal-footer">
+      <button class="btn teal waves-effect" [disabled]="!navbarEditForm.valid" (click)="onSubmit()">Save</button>
+      <button class="btn red waves-effect" (click)="onDelete()">Delete</button>
+      <button class="btn lime  waves-effect" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
 </div>
