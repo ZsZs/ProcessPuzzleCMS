@@ -14,7 +14,8 @@
             <input type="text" class="form-control" id="brand" formControlName="brand" placeholder="Brand">
           </div>
           <button type="submit" class="btn btn-success" [disabled]="!navbarEditForm.valid">Save</button>
-          <a class="btn btn-danger" (click)="onCancel()">Cancel</a>
+          <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+          <a class="btn btn-info" (click)="onCancel()">Cancel</a>
         </form>
       </div>
     </div>

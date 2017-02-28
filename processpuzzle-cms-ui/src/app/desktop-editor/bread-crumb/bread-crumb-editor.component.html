@@ -1,0 +1,20 @@
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Edit Breadcrumb</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="onCancel()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Breadcrumb trail is a graphical control element used as a navigational aid in user interfaces. It allows users to keep track of their locations within programs, documents, or websites.</p>
+        <form [formGroup]="breadCrumbEditForm" (ngSubmit)="onSubmit()">
+          <button type="submit" class="btn btn-success" [disabled]="!breadCrumbEditForm.valid">Save</button>
+          <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+          <a class="btn btn-info" (click)="onCancel()">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

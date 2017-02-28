@@ -4,21 +4,22 @@ import {FormBuilder, FormGroup, FormControl, Validators} from "@angular/forms";
 import {Router, ActivatedRoute} from "@angular/router";
 import {NavigationBar} from "./navigation-bar";
 import {NavigationBarService} from "./navigation-bar.service";
+import {Desktop} from "../desktop";
 
 @Component({
-  selector: 'app-navigation-bar-factory',
-  templateUrl: 'navigation-bar-factory.component.html'
+  selector: 'pp-navigation-bar-editor',
+  templateUrl: 'navigation-bar-editor.component.html'
 })
 
-export class NavigationBarFactoryComponent implements AfterViewInit, OnInit {
+export class NavigationBarEditorComponent implements AfterViewInit, OnInit {
   @ViewChild('childModal') public childModal:ModalDirective;
   public navbarEditForm: FormGroup;
   navigationBar: NavigationBar;
-  desktopTemplate = `<DynamicComponent [componentTemplate]='"<span>Updated content...</span>"'></DynamicComponent>`;
-  @Output() desktopChanged: EventEmitter<string> = new EventEmitter();
 
   // constructors
-  constructor( private router: Router, private formBuilder: FormBuilder, navigationBarService: NavigationBarService ) { }
+  constructor( private router: Router, private formBuilder: FormBuilder, private desktop: Desktop ) {
+    this.navigationBar = desktop.navigationBar;
+  }
 
   // public accessors and mutators
   ngAfterViewInit(){
@@ -26,6 +27,7 @@ export class NavigationBarFactoryComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
+    this.navigationBar = this.desktop.navigationBar;
     this.initForm();
   }
 
@@ -34,9 +36,15 @@ export class NavigationBarFactoryComponent implements AfterViewInit, OnInit {
     this.navigateBack();
   }
 
+  onDelete() {
+    this.childModal.hide();
+    this.desktop.deleteNavigationBar();
+    this.navigateBack();
+  }
+
   onSubmit() {
-    const navigationBar = this.navbarEditForm.value;
-    this.desktopChanged.emit( this.desktopTemplate );
+    this.navigationBar = this.navbarEditForm.value;
+    this.desktop.updateNavigationBar( this.navigationBar );
     this.navigateBack();
   }
 
@@ -47,7 +55,7 @@ export class NavigationBarFactoryComponent implements AfterViewInit, OnInit {
   // protected, private helper methods
   private initForm() {
     this.navbarEditForm = this.formBuilder.group({
-      brand: [this.navigationBar ? this.navigationBar.brand : '', Validators.required]
+      brand: [this.navigationBar ? this.navigationBar.brand : null, Validators.required]
     });
   }
 

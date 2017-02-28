@@ -1,18 +1,16 @@
-import { Component } from '@angular/core';
-import {DynamicComponentModule} from "angular2-dynamic-component";
+import {Component, ViewChild} from '@angular/core';
+import {IntroComponent} from "./intro.component";
+import {DesktopEditorComponent} from "./desktop-editor.component";
+import {DesktopEditorMenuComponent} from "./desktop-editor/desktop-editor-menu.component";
+import {DesktopComponent} from "./desktop.component";
 
 @Component({
   selector: 'pp-root',
   template: `
-    <app-desktop-editor (desktopChanged)="onDesktopChanged($event)"></app-desktop-editor>
-    <app-desktop [desktopTemplate]="desktopTemplate"></app-desktop>
-    `
+    <pp-desktop-editor></pp-desktop-editor>
+    <pp-desktop></pp-desktop>
+  `
 })
 
 export class AppComponent {
-  desktopTemplate = '';
-
-  onDesktopChanged( desktopTemplate ){
-    this.desktopTemplate = desktopTemplate;
-  }
 }
