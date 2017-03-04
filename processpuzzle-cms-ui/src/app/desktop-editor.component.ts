@@ -5,9 +5,9 @@ import {DesktopEditorMenuComponent} from "./desktop-editor/desktop-editor-menu.c
 @Component({
   selector: 'pp-desktop-editor',
   template: `
-    <pp-desktop-editor-menu></pp-desktop-editor-menu>
-    <pp-intro (onShowEditor)="showEditor( $event )"></pp-intro>
-    <router-outlet (desktopChanged)="onDesktopChanged($event)"></router-outlet>
+        <pp-desktop-editor-menu></pp-desktop-editor-menu>
+        <pp-intro (onShowEditor)="showEditor( $event )"></pp-intro>    
+        <router-outlet (desktopChanged)="onDesktopChanged($event)"></router-outlet>
     `,
   providers: [NavigationBarService]
 })

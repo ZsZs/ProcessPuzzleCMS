@@ -10,6 +10,7 @@ import {Desktop} from "./desktop-editor/desktop";
     `.backgroundImage { background-image: url( './assets/images/intro-background.jpg' ); background-repeat: no-repeat; background-size: cover; width: 100%; height: 100% }`
   ]
 })
+
 export class IntroComponent implements OnInit {
   isVisible: boolean;
   @Output() onShowEditor = new EventEmitter<boolean>();
@@ -29,6 +30,5 @@ export class IntroComponent implements OnInit {
          this.isVisible = this.desktop.hasElements();
        }
     )
-
   }
 }

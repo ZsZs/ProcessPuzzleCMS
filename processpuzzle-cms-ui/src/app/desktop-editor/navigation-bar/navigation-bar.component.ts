@@ -1,22 +1,23 @@
 import {Component, OnInit, Input} from '@angular/core';
+import {ContentReference} from "./content-reference";
 
 @Component({
   selector: 'pp-navigation-bar',
   template: `
-    <header>
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">{{brand}}</a>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <nav>
+      <div class="nav-wrapper">
+        <a class="brand-logo" href="#">{{brand}}</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li *ngFor="let contentReference of links"><a [routerLink]="[contentReference.route]">{{contentReference.title}}</a></li>
+        </ul>
+      </div>
+    </nav>
 `
 })
 
 export class NavigationBarComponent implements OnInit {
   @Input() brand: string;
+  links = [ new ContentReference( "/content/home", "Home" ), new ContentReference( "/content/child-one", "Child one" ), new ContentReference( "/content/child-two", "Child two" )];
 
   constructor() { }
 

@@ -14,7 +14,7 @@ export class DesktopComponentFactory {
   constructor() { }
 
   // public accesors and mutators
-  generateDesktopComponents ( desktop: Desktop ): Array<DynamicComponentDefinition> {
+  generateHeaderComponents (desktop: Desktop ): Array<DynamicComponentDefinition> {
     let desktopComponentDefinitions = new Array<DynamicComponentDefinition>();
     let componentDefinition: DynamicComponentDefinition;
 
@@ -28,6 +28,13 @@ export class DesktopComponentFactory {
       desktopComponentDefinitions.push( componentDefinition );
     }
 
+    return desktopComponentDefinitions;
+  }
+
+  generateFooterComponents (desktop: Desktop ): Array<DynamicComponentDefinition> {
+    let desktopComponentDefinitions = new Array<DynamicComponentDefinition>();
+    let componentDefinition: DynamicComponentDefinition;
+
     componentDefinition = new FooterComponentFactory().generate( desktop );
     if( componentDefinition ){
       desktopComponentDefinitions.push( componentDefinition );
@@ -35,5 +42,4 @@ export class DesktopComponentFactory {
 
     return desktopComponentDefinitions;
   }
-
 }

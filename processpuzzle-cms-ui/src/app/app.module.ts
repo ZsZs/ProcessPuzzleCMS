@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from "@angular/router";
 
-import { DynamicComponentModule } from 'angular2-dynamic-component/index';
+import {DynamicComponentModule, DynamicComponentModuleFactory} from 'angular2-dynamic-component/index';
 import { MaterializeModule } from 'angular2-materialize';
 import { ModalModule, DropdownModule } from "ng2-bootstrap";
 
@@ -21,6 +21,8 @@ import { BreadCrumbEditorComponent } from './desktop-editor/bread-crumb/bread-cr
 import { IntroComponent } from './intro.component';
 import { FooterComponent } from './desktop-editor/footer/footer.component';
 import { FooterEditorComponent } from './desktop-editor/footer/footer-editor.component';
+import { SmartDocumentComponent } from './content-editor/smart-document.component';
+import {DesktopComponentFactory} from "./desktop-editor/desktop-component-factory";
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { FooterEditorComponent } from './desktop-editor/footer/footer-editor.com
     BreadCrumbEditorComponent,
     IntroComponent,
     FooterComponent,
-    FooterEditorComponent
+    FooterEditorComponent,
+    SmartDocumentComponent
   ],
   imports: [
     BrowserModule,
