@@ -1,6 +1,7 @@
 import {Component, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
 import {NavigationBarService} from "./desktop-editor/navigation-bar/navigation-bar.service";
 import {DesktopEditorMenuComponent} from "./desktop-editor/desktop-editor-menu.component";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'pp-desktop-editor',
@@ -29,5 +30,4 @@ export class DesktopEditorComponent implements OnInit {
 
    ngOnInit() {
    }
-
 }

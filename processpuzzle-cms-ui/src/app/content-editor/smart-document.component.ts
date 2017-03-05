@@ -1,5 +1,5 @@
-import {Component, OnInit, AfterContentInit} from '@angular/core';
-import { Desktop } from "../desktop-editor/desktop";
+import {Component, OnInit, AfterContentInit, AfterViewChecked} from '@angular/core';
+import {Desktop} from "../desktop-editor/desktop";
 import {DynamicComponentModule} from "angular2-dynamic-component";
 import {SmartDocumentService} from "./smart-document.service";
 import {ActivatedRoute} from "@angular/router";
@@ -8,59 +8,74 @@ import {SmartDocument} from "./smart-document";
 import {ContentEditor} from "./content-editor";
 
 @Component({
-  selector: 'pp-smart-document',
-  template: `
+   selector: 'pp-smart-document',
+   template: `
     <div [hidden]="isVisible">
-        <div  data-editable data-name="main-content">
-            <template dynamic-component [componentModules]="extraModules" [componentTemplate]='extraTemplate'></template>
-        </div>
+        <template dynamic-component [componentModules]="extraModules" [componentTemplate]="extraTemplate" (dynamicComponentReady)="documentIsLoaded($event)"></template> 
     </div>`,
    providers: [ContentEditor]
 })
 
-export class SmartDocumentComponent implements AfterContentInit, OnInit {
-  contentEditor: ContentEditor;
-  document: SmartDocument;
-  documentName: string;
-  extraTemplate: string;
-  extraModules = [DynamicComponentModule];
-  isVisible: boolean;
-  routeSubscription: Subscription;
+export class SmartDocumentComponent implements AfterViewChecked, OnInit {
+   document: SmartDocument;
+   documentName: string;
+   extraTemplate: string;
+   extraModules = [DynamicComponentModule];
+   isVisible: boolean;
+   routeSubscription: Subscription;
 
-  constructor( private route: ActivatedRoute, private desktop: Desktop, private documentService: SmartDocumentService ) { }
-
-  // public accessors and mutators
-   ngAfterContentInit() {
-      this.contentEditor = new ContentEditor();
-      this.contentEditor.initialize();
+   constructor(private contentEditor: ContentEditor, private route: ActivatedRoute, private desktop: Desktop, private documentService: SmartDocumentService) {
    }
 
-  ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
-  }
+   // public accessors and mutators
+   contentChanged(content: string) {
+      this.saveContent( content );
+   }
 
-  ngOnInit() {
-    this.verifyifVisible();
-    this.routeSubscription = this.route.url.subscribe(
-       ( url: any ) => {
-         this.documentName = url;
-         this.document = this.documentService.loadDocument( this.documentName );
-         const templateContent = this.document.template;
-         this.extraTemplate = `<DynamicComponent [componentTemplate]='"${templateContent}"'></DynamicComponent>`;
-       }
-    );
-  }
+   documentIsLoaded(scope: any) {
+      this.contentEditor = new ContentEditor();
+      this.contentEditor.initialize();
+      this.contentEditor.watchContentChange().subscribe(
+         (content: string) => {
+            this.saveContent( content );
+         }
+      )
+   }
 
-  // protected, private helper mehtods
-  private verifyifVisible() {
-    this.isVisible = !this.desktop.hasElements();
-  }
+   ngAfterViewChecked() {
+   }
 
-  private subscribeToDesktopChange(){
-    this.desktop.watchDesktopChange().subscribe(
-       () => {
-         this.verifyifVisible();
-       }
-    )
-  }
+   ngOnDestroy() {
+      this.routeSubscription.unsubscribe();
+   }
+
+   ngOnInit() {
+      this.verifyifVisible();
+      this.routeSubscription = this.route.url.subscribe(
+         (url: any) => {
+            this.documentName = url;
+            this.document = this.documentService.loadDocument(this.documentName);
+            const templateContent = this.document.template;
+            this.extraTemplate = `<div data-editable data-name="${this.documentName}">${templateContent}</div>`;
+         }
+      );
+   }
+
+   // protected, private helper mehtods
+   private saveContent(content: string) {
+      this.document.updateContent(content);
+      this.documentService.saveDocument(this.document);
+   }
+
+   private subscribeToDesktopChange() {
+      this.desktop.watchDesktopChange().subscribe(
+         () => {
+            this.verifyifVisible();
+         }
+      )
+   }
+
+   private verifyifVisible() {
+      this.isVisible = !this.desktop.hasElements();
+   }
 }
