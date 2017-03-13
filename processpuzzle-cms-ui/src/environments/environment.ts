@@ -5,9 +5,16 @@
 
 export const environment = {
   production: false,
+
+  documentService: {
+    protocol: 'https:',
+    host: 'processpuzzlecms-dev.firebaseio.com',
+    contextPath: ''
+  },
+
   navigationBarService: {
-    protocol: 'http:',
-    host: 'localhost:9124',
-    contextPath: 'api'
+    protocol: 'https:',
+    host: 'processpuzzlecms-dev.firebaseio.com',
+    contextPath: ''
   }
 };

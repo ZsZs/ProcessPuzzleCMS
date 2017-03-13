@@ -2,56 +2,58 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from "@angular/http";
 import { Observable} from "rxjs";
 import { NavigationBar } from "./navigation-bar";
-import { environment } from '../../../environments/environment';
+import { UrlBuilder } from '../../utility/url-builder';
 
 @Injectable()
 export class NavigationBarService {
-  private resourcePath = 'navigationbar';
+  private static readonly serviceProperties = 'navigationBarService';
+  private resourcePath = 'navigationbars.json';
+  private urlBuilder = new UrlBuilder( NavigationBarService.serviceProperties, this.resourcePath );
 
   // constructors
   constructor( private http: Http ) {}
 
   // public accessors and mutators
-  add( newCar: NavigationBar ): Observable<Response> {
-    const body = JSON.stringify( newCar );
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*' });
-    return this.http.post( this.buildResourceUrl(), body, { headers: headers });
-  }
-
-  deteleCar( carToRefactor: NavigationBar ): Observable<any> {
-    let resourceUrl = this.buildResourceUrl( String( carToRefactor.id ));
+  delete(navigationBar: NavigationBar ): Observable<any> {
+    let resourceUrl = this.urlBuilder.buildResourceUrl( String( navigationBar.id ));
     return this.http.delete( resourceUrl );
   }
 
-  getCar( index: number ): Observable<NavigationBar> {
-    return this.http.get( this.buildResourceUrl( String( index ))).map(
+  findAll(): Observable<NavigationBar[]> {
+    const body = '';
+    const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*' });
+    return this.http.get( this.urlBuilder.buildResourceUrl(), { headers: headers } ).map(
+       (response: Response) => response.json()
+    );
+  }
+
+  findById(index: number ): Observable<NavigationBar> {
+    return this.http.get( this.urlBuilder.buildResourceUrl( String( index ))).map(
        ( response: Response ) => response.json()
     );
   }
 
-  getCars(): Observable<NavigationBar[]> {
-    const body = '';
+  save( navigationBar: NavigationBar ): Observable<NavigationBar> {
+    const body = JSON.stringify( navigationBar );
     const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*' });
-    return this.http.get( this.buildResourceUrl(), { headers: headers } ).map(
-       (response: Response) => response.json()
-    );
-  }
-
-  update( car: NavigationBar ): Observable<NavigationBar> {
-    const body = JSON.stringify( car );
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*' });
-    return this.http.put( this.buildResourceUrl( String( car.id ) ), body, { headers: headers }).map(
-       (response: Response) => response.json()
-    );
+    if( navigationBar.id ){
+      return this.update( navigationBar.id, body, headers );
+    }else {
+      return this.add( body, headers );
+    }
   }
 
   // protected, private helper methods
-  private buildResourceUrl( subResource?: string ): string {
-    let resourceUrl = environment.navigationBarService.protocol;
-    resourceUrl += '//' + environment.navigationBarService.host;
-    resourceUrl += Boolean( environment.navigationBarService.contextPath ) ? '/' + environment.navigationBarService.contextPath : '';
-    resourceUrl += '/' + this.resourcePath;
-    resourceUrl += Boolean( subResource ) ? '/' + subResource : '';
-    return resourceUrl;
+  private add( body: string, headers: Headers ): Observable<NavigationBar> {
+    return this.http.post( this.urlBuilder.buildResourceUrl(), body, { headers: headers }).map(
+       (response: Response) => response.json()
+    );
   }
+
+  private update(  id: number, body: string, headers: Headers ): Observable<NavigationBar> {
+    return this.http.put( this.urlBuilder.buildResourceUrl( String( id ) ), body, { headers: headers }).map(
+       (response: Response) => response.json()
+    );
+  }
+
 }

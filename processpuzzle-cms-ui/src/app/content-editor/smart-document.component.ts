@@ -29,7 +29,7 @@ export class SmartDocumentComponent implements AfterViewChecked, OnInit {
 
    // public accessors and mutators
    contentChanged(content: string) {
-      this.saveContent( content );
+      this.saveContent(content);
    }
 
    documentIsLoaded(scope: any) {
@@ -37,7 +37,7 @@ export class SmartDocumentComponent implements AfterViewChecked, OnInit {
       this.contentEditor.initialize();
       this.contentEditor.watchContentChange().subscribe(
          (content: string) => {
-            this.saveContent( content );
+            this.saveContent(content);
          }
       )
    }
@@ -54,9 +54,13 @@ export class SmartDocumentComponent implements AfterViewChecked, OnInit {
       this.routeSubscription = this.route.url.subscribe(
          (url: any) => {
             this.documentName = url;
-            this.document = this.documentService.loadDocument(this.documentName);
-            const templateContent = this.document.template;
-            this.extraTemplate = `<div data-editable data-name="${this.documentName}">${templateContent}</div>`;
+            this.documentService.loadDocument(this.documentName).subscribe(
+               (response) => {
+                  this.document = response;
+                  const templateContent = this.document.template;
+                  this.extraTemplate = `<div data-editable data-name="${this.documentName}">${templateContent}</div>`;
+               }
+            );
          }
       );
    }
@@ -64,7 +68,11 @@ export class SmartDocumentComponent implements AfterViewChecked, OnInit {
    // protected, private helper mehtods
    private saveContent(content: string) {
       this.document.updateContent(content);
-      this.documentService.saveDocument(this.document);
+      this.documentService.saveDocument(this.document).subscribe(
+         ( response ) => {
+            this.document.id = response.id;
+         }
+      );
    }
 
    private subscribeToDesktopChange() {

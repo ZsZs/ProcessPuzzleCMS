@@ -18,7 +18,7 @@ export class NavigationBarEditorComponent implements AfterViewInit, OnInit {
   navigationBar: NavigationBar;
 
   // constructors
-  constructor( private router: Router, private formBuilder: FormBuilder, private desktop: Desktop ) {
+  constructor( private router: Router, private formBuilder: FormBuilder, private desktop: Desktop, private navigationBarService: NavigationBarService) {
     this.navigationBar = desktop.navigationBar;
   }
 
@@ -39,15 +39,24 @@ export class NavigationBarEditorComponent implements AfterViewInit, OnInit {
 
   onDelete() {
     this.closeForm();
-    this.desktop.deleteNavigationBar();
-    this.navigateBack();
+    this.navigationBarService.delete( this.navigationBar ).subscribe(
+       ( success ) => {
+         this.navigationBar = null;
+         this.desktop.deleteNavigationBar();
+         this.navigateBack();
+       }
+    );
   }
 
   onSubmit() {
     this.navigationBar = this.navbarEditForm.value;
-    this.desktop.updateNavigationBar( this.navigationBar );
+    this.navigationBarService.save( this.navigationBar ).subscribe(
+       ( navigationBar ) => {
+         this.desktop.updateNavigationBar( this.navigationBar );
+         this.navigateBack();
+       }
+    );
     this.closeForm();
-    this.navigateBack();
   }
 
   // protected, private helper methods

@@ -1,4 +1,5 @@
 export class SmartDocument {
+   id: number;
    template = `<h1>Loaded dynamically!</h1>`;
 
    // constructors
