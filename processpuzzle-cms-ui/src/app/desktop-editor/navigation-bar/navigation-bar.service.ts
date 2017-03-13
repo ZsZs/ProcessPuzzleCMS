@@ -3,15 +3,21 @@ import { Http, Headers, Response } from "@angular/http";
 import { Observable} from "rxjs";
 import { NavigationBar } from "./navigation-bar";
 import { UrlBuilder } from '../../utility/url-builder';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Injectable()
 export class NavigationBarService {
+  private navigationbar: FirebaseObjectObservable<NavigationBar>;
+  private navigationbars: FirebaseListObservable<NavigationBar[]>;
   private static readonly serviceProperties = 'navigationBarService';
-  private resourcePath = 'navigationbars.json';
+  private resourcePath = 'navigationbars';
   private urlBuilder = new UrlBuilder( NavigationBarService.serviceProperties, this.resourcePath );
 
   // constructors
-  constructor( private http: Http ) {}
+  constructor( private http: Http, private database: AngularFireDatabase ) {
+    this.navigationbars = database.list( this.resourcePath );
+//    this.navigationbar = database.object( this.resourcePath + '/');
+  }
 
   // public accessors and mutators
   delete(navigationBar: NavigationBar ): Observable<any> {
@@ -20,7 +26,6 @@ export class NavigationBarService {
   }
 
   findAll(): Observable<NavigationBar[]> {
-    const body = '';
     const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*' });
     return this.http.get( this.urlBuilder.buildResourceUrl(), { headers: headers } ).map(
        (response: Response) => response.json()
@@ -28,6 +33,7 @@ export class NavigationBarService {
   }
 
   findById(index: number ): Observable<NavigationBar> {
+    const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*' });
     return this.http.get( this.urlBuilder.buildResourceUrl( String( index ))).map(
        ( response: Response ) => response.json()
     );
@@ -45,9 +51,12 @@ export class NavigationBarService {
 
   // protected, private helper methods
   private add( body: string, headers: Headers ): Observable<NavigationBar> {
-    return this.http.post( this.urlBuilder.buildResourceUrl(), body, { headers: headers }).map(
-       (response: Response) => response.json()
-    );
+    let key = this.navigationbars.push( body ).key;
+    return null;
+    
+//    return this.http.post( this.urlBuilder.buildResourceUrl(), body, { headers: headers }).map(
+//       (response: Response) => response.json()
+//    );
   }
 
   private update(  id: number, body: string, headers: Headers ): Observable<NavigationBar> {

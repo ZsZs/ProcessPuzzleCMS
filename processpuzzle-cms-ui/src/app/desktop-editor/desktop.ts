@@ -8,54 +8,61 @@ import {Footer} from "./footer/footer";
 export class Desktop {
   private desktopTemplate = `<DynamicComponent [componentTemplate]='"<span>Navigationbar added...</span>"'></DynamicComponent>`;
   private desktopTemplateSource = new Subject<string>();
-  breadCrumb: BreadCrumb;
-  footer: Footer;
-  navigationBar: NavigationBar;
+  private _breadCrumb: BreadCrumb;
+  private _footer: Footer;
+  private _navigationBar: NavigationBar;
+  id: string;
+  name = 'Sample Desktop';
 
   // constructors
   constructor() { }
 
   // public accessors and mutators
   deleteBreadCrumb (){
-    this.breadCrumb = null;
+    this._breadCrumb = null;
     this.announceDesktopChanged();
   }
 
   deleteFooter (){
-    this.footer = null;
+    this._footer = null;
     this.announceDesktopChanged();
   }
 
   deleteNavigationBar (){
-    this.navigationBar = null;
+    this._navigationBar = null;
     this.announceDesktopChanged();
   }
 
   hasElements (): boolean{
-    if ( this.navigationBar != null || this.footer != null || this.breadCrumb != null ){
+    if ( this._navigationBar != null || this._footer != null || this._breadCrumb != null ){
       return true;
     }
     return false;
   }
 
   updateBreadCrumb ( newBreadCrumb: BreadCrumb ){
-    this.breadCrumb = newBreadCrumb;
+    this._breadCrumb = newBreadCrumb;
     this.announceDesktopChanged();
   }
 
   updateFooter ( newFooter: Footer ){
-    this.footer = newFooter;
+    this._footer = newFooter;
     this.announceDesktopChanged();
   }
 
   updateNavigationBar ( newNavigationBar: NavigationBar ){
-    this.navigationBar = newNavigationBar;
+    this._navigationBar = newNavigationBar;
     this.announceDesktopChanged();
   }
 
   watchDesktopChange(){
     return this.desktopTemplateSource.asObservable();
   }
+
+  // properties
+  public get breadCrumb(): BreadCrumb { return this._breadCrumb; }
+  public get footer(): Footer { return this._footer; }
+  public get navigationBar(): NavigationBar { return this._navigationBar; }
 
   // protected, private helper methods
   private announceDesktopChanged(){

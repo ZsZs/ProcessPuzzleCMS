@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from "@angular/router";
+import { AngularFireModule } from 'angularfire2';
 
-import {DynamicComponentModule, DynamicComponentModuleFactory} from 'angular2-dynamic-component/index';
+import { DynamicComponentModule, DynamicComponentModuleFactory } from 'angular2-dynamic-component/index';
 import { MaterializeModule } from 'angular2-materialize';
 import { ModalModule, DropdownModule } from "ng2-bootstrap";
 
@@ -22,7 +23,15 @@ import { IntroComponent } from './intro.component';
 import { FooterComponent } from './desktop-editor/footer/footer.component';
 import { FooterEditorComponent } from './desktop-editor/footer/footer-editor.component';
 import { SmartDocumentComponent } from './content-editor/smart-document.component';
-import {DesktopComponentFactory} from "./desktop-editor/desktop-component-factory";
+import { DesktopComponentFactory } from "./desktop-editor/desktop-component-factory";
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyDkLfPmjbgBOVHsi3g75n2Is6PzX0J3ulk",
+  authDomain: "processpuzzlecms-dev.firebaseapp.com",
+  databaseURL: "https://processpuzzlecms-dev.firebaseio.com",
+  storageBucket: "processpuzzlecms-dev.appspot.com",
+  messagingSenderId: "676590811043"
+};
 
 @NgModule({
   declarations: [
@@ -40,6 +49,7 @@ import {DesktopComponentFactory} from "./desktop-editor/desktop-component-factor
     SmartDocumentComponent
   ],
   imports: [
+    AngularFireModule.initializeApp( firebaseConfig ),
     BrowserModule,
     DropdownModule.forRoot(),
     DynamicComponentModule,
