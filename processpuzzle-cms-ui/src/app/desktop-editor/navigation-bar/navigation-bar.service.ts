@@ -3,7 +3,7 @@ import { Http, Headers, Response } from "@angular/http";
 import { Observable} from "rxjs";
 import { NavigationBar } from "./navigation-bar";
 import { UrlBuilder } from '../../utility/url-builder';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Injectable()
 export class NavigationBarService {

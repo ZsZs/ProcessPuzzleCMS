@@ -4,10 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from "@angular/router";
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+import * as firebase from 'firebase/app'; // Do not import from 'firebase' as you'd lose the tree shaking benefits
 
 import { DynamicComponentModule, DynamicComponentModuleFactory } from 'angular2-dynamic-component/index';
 import { MaterializeModule } from 'angular2-materialize';
-import { ModalModule, DropdownModule } from "ng2-bootstrap";
+import { ModalModule, BsDropdownModule } from "ng2-bootstrap";
 
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from "./app.routing";
@@ -25,14 +29,6 @@ import { FooterEditorComponent } from './desktop-editor/footer/footer-editor.com
 import { SmartDocumentComponent } from './content-editor/smart-document.component';
 import { DesktopComponentFactory } from "./desktop-editor/desktop-component-factory";
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyDkLfPmjbgBOVHsi3g75n2Is6PzX0J3ulk",
-  authDomain: "processpuzzlecms-dev.firebaseapp.com",
-  databaseURL: "https://processpuzzlecms-dev.firebaseio.com",
-  storageBucket: "processpuzzlecms-dev.appspot.com",
-  messagingSenderId: "676590811043"
-};
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,9 +45,11 @@ export const firebaseConfig = {
     SmartDocumentComponent
   ],
   imports: [
-    AngularFireModule.initializeApp( firebaseConfig ),
+    AngularFireModule.initializeApp( environment.firebaseConfig, 'pp-root'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     BrowserModule,
-    DropdownModule.forRoot(),
+    BsDropdownModule.forRoot(),
     DynamicComponentModule,
     FormsModule,
     HttpModule,
