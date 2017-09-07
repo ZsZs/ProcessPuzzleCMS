@@ -1,68 +1,57 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from "@angular/http";
-import { Observable} from "rxjs";
-import { NavigationBar } from "./navigation-bar";
-import { UrlBuilder } from '../../utility/url-builder';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {NavigationBar} from "./navigation-bar";
+import {UrlBuilder} from '../../utility/url-builder';
+import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 
 @Injectable()
 export class NavigationBarService {
-  private navigationbar: FirebaseObjectObservable<NavigationBar>;
-  private navigationbars: FirebaseListObservable<NavigationBar[]>;
-  private static readonly serviceProperties = 'navigationBarService';
-  private resourcePath = 'navigationbars';
-  private urlBuilder = new UrlBuilder( NavigationBarService.serviceProperties, this.resourcePath );
+   public static readonly SERVICE_PROPERTIES = 'navigationBarService';
+   public static readonly RESOURCE_PATH = 'navigationbars.json';
+   private headers: HttpHeaders = new HttpHeaders();
+   private navigationbar: FirebaseObjectObservable<NavigationBar>;
+   private navigationbars: FirebaseListObservable<NavigationBar[]>;
+   private urlBuilder = new UrlBuilder(NavigationBarService.SERVICE_PROPERTIES, NavigationBarService.RESOURCE_PATH);
 
-  // constructors
-  constructor( private http: Http, private database: AngularFireDatabase ) {
-    this.navigationbars = database.list( this.resourcePath );
-//    this.navigationbar = database.object( this.resourcePath + '/');
-  }
+   // constructors
+   constructor(private http: HttpClient, private database: AngularFireDatabase) {
+      this.navigationbars = database.list(NavigationBarService.RESOURCE_PATH);
+      this.headers.set('Content-Type', 'application/json');
+      this.headers.set('Access-Control-Allow-Origin', '*');
+   }
 
-  // public accessors and mutators
-  delete(navigationBar: NavigationBar ): Observable<any> {
-    let resourceUrl = this.urlBuilder.buildResourceUrl( String( navigationBar.id ));
-    return this.http.delete( resourceUrl );
-  }
+   // public accessors and mutators
+   delete(navigationBar: NavigationBar): Observable<any> {
+      let resourceUrl = this.urlBuilder.buildResourceUrl(String(navigationBar.id));
+      return this.http.delete(resourceUrl);
+   }
 
-  findAll(): Observable<NavigationBar[]> {
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*' });
-    return this.http.get( this.urlBuilder.buildResourceUrl(), { headers: headers } ).map(
-       (response: Response) => response.json()
-    );
-  }
+   findAll(): Observable<NavigationBar[]> {
+      const headers = this.headers;
+      return this.http.get<NavigationBar[]>(this.urlBuilder.buildResourceUrl(), {headers} );
+   }
 
-  findById(index: number ): Observable<NavigationBar> {
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*' });
-    return this.http.get( this.urlBuilder.buildResourceUrl( String( index ))).map(
-       ( response: Response ) => response.json()
-    );
-  }
+   findById(index: number): Observable<NavigationBar> {
+      return this.http.get<NavigationBar>(this.urlBuilder.buildResourceUrl( String( index )));
+   }
 
-  save( navigationBar: NavigationBar ): Observable<NavigationBar> {
-    const body = JSON.stringify( navigationBar );
-    const headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin' : '*' });
-    if( navigationBar.id ){
-      return this.update( navigationBar.id, body, headers );
-    }else {
-      return this.add( body, headers );
-    }
-  }
+   save(navigationBar: NavigationBar): Observable<NavigationBar> {
+      const body = JSON.stringify(navigationBar);
+      if (navigationBar.id) {
+         return this.update( navigationBar.id, body, this.headers);
+      } else {
+         return this.add(body, this.headers );
+      }
+   }
 
-  // protected, private helper methods
-  private add( body: string, headers: Headers ): Observable<NavigationBar> {
-    let key = this.navigationbars.push( body ).key;
-    return null;
-    
-//    return this.http.post( this.urlBuilder.buildResourceUrl(), body, { headers: headers }).map(
-//       (response: Response) => response.json()
-//    );
-  }
+   // protected, private helper methods
+   private add(body: string, headers: HttpHeaders): Observable<NavigationBar> {
+      return this.http.post<NavigationBar>(this.urlBuilder.buildResourceUrl(), body );
+   }
 
-  private update(  id: number, body: string, headers: Headers ): Observable<NavigationBar> {
-    return this.http.put( this.urlBuilder.buildResourceUrl( String( id ) ), body, { headers: headers }).map(
-       (response: Response) => response.json()
-    );
-  }
+   private update(id: number, body: string, headers: HttpHeaders): Observable<NavigationBar> {
+      return this.http.put<NavigationBar>(this.urlBuilder.buildResourceUrl( String(id)), body, {headers});
+   }
 
 }

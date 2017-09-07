@@ -1,33 +1,35 @@
+// Angular
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
+
+// Third party components
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
-import { environment } from '../environments/environment';
-import * as firebase from 'firebase/app'; // Do not import from 'firebase' as you'd lose the tree shaking benefits
-
 import { DynamicComponentModule, DynamicComponentModuleFactory } from 'angular2-dynamic-component/index';
 import { MaterializeModule } from 'angular2-materialize';
 import { ModalModule, BsDropdownModule } from "ng2-bootstrap";
 
+// ProcessPuzzle components
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from "./app.routing";
+import { BreadCrumbComponent } from './desktop-editor/bread-crumb/bread-crumb.component';
+import { BreadCrumbEditorComponent } from './desktop-editor/bread-crumb/bread-crumb-editor.component';
 import { Desktop } from './desktop-editor/desktop';
 import { DesktopComponent } from './desktop.component';
 import { DesktopEditorComponent } from './desktop-editor.component';
 import { DesktopEditorMenuComponent } from './desktop-editor/desktop-editor-menu.component';
-import { NavigationBarComponent } from './desktop-editor/navigation-bar/navigation-bar.component';
-import { NavigationBarEditorComponent } from './desktop-editor/navigation-bar/navigation-bar-editor.component';
-import { BreadCrumbComponent } from './desktop-editor/bread-crumb/bread-crumb.component';
-import { BreadCrumbEditorComponent } from './desktop-editor/bread-crumb/bread-crumb-editor.component';
-import { IntroComponent } from './intro.component';
 import { FooterComponent } from './desktop-editor/footer/footer.component';
 import { FooterEditorComponent } from './desktop-editor/footer/footer-editor.component';
+import { environment } from '../environments/environment';
+import { IntroComponent } from './intro.component';
+import { NavigationBarComponent } from './desktop-editor/navigation-bar/navigation-bar.component';
+import { NavigationBarEditorComponent } from './desktop-editor/navigation-bar/navigation-bar-editor.component';
 import { SmartDocumentComponent } from './content-editor/smart-document.component';
-import { DesktopComponentFactory } from "./desktop-editor/desktop-component-factory";
+import {HttpLoggingInterceptor} from "./utility/http-logging";
 
 @NgModule({
   declarations: [
@@ -52,13 +54,13 @@ import { DesktopComponentFactory } from "./desktop-editor/desktop-component-fact
     BsDropdownModule.forRoot(),
     DynamicComponentModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     MaterializeModule,
     ModalModule.forRoot(),
     ReactiveFormsModule,
     RouterModule.forRoot( APP_ROUTES )
   ],
-  providers: [Desktop],
+  providers: [Desktop,{provide: HTTP_INTERCEPTORS, useClass: HttpLoggingInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
