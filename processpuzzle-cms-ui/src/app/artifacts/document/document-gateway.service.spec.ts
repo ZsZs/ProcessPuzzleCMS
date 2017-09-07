@@ -39,14 +39,14 @@ describe('DocumentGateway', () => {
       expect( response ).toEqual( expectedResponse );
     });
 
-    http.expectOne('http://localhost:8124/server/api/documents' ).flush( expectedResponse );
+    http.expectOne( documentGateway.urlBuilder.this.urlBuilder.buildResourceUrl() ).flush( expectedResponse );
     http.verify();
   });
 
   it('delete() send DELETE to backend.', () => {
     documentGateway.delete( 1 ).subscribe( () => {});
 
-    http.expectOne('http://localhost:8124/server/api/documents/1' ).flush( {} );
+    http.expectOne( documentGateway.urlBuilder.this.urlBuilder.buildResourceUrl( '1' )).flush( {} );
     http.verify();
   });
 
@@ -55,7 +55,7 @@ describe('DocumentGateway', () => {
       expect( response ).toEqual( [expectedResponse] );
     });
 
-    http.expectOne('http://localhost:8124/server/api/documents' ).flush( [expectedResponse] );
+    http.expectOne( documentGateway.urlBuilder.this.urlBuilder.buildResourceUrl() ).flush( [expectedResponse] );
     http.verify();
   });
 
@@ -64,7 +64,7 @@ describe('DocumentGateway', () => {
       expect( response ).toEqual( expectedResponse );
     });
 
-    http.expectOne('http://localhost:8124/server/api/documents/1' ).flush( expectedResponse );
+    http.expectOne( documentGateway.urlBuilder.this.urlBuilder.buildResourceUrl( '1' ) ).flush( expectedResponse );
     http.verify();
   });
 
@@ -75,7 +75,7 @@ describe('DocumentGateway', () => {
       expect( response ).toEqual( expectedResponse );
     });
 
-    http.expectOne('http://localhost:8124/server/api/documents/1' ).flush( expectedResponse );
+    http.expectOne( documentGateway.urlBuilder.this.urlBuilder.buildResourceUrl( '1' )).flush( expectedResponse );
     http.verify();
   });
 });

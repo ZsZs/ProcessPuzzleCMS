@@ -1,6 +1,5 @@
 
 import {isNullOrUndefined} from 'util';
-import {Breadcrumb} from '../navigation/breadcrumb';
 
 export class TreeNode {
   private _children: TreeNode[] = new Array();
@@ -71,7 +70,7 @@ export class TreeNode {
     return foundNode;
   }
 
-  public findDescendantChildByReferencedObject( evaluator: (Breadcrumb) => boolean ): TreeNode {
+  public findDescendantChildByReferencedObject( evaluator: (any) => boolean ): TreeNode {
     let foundNode = null;
     this._children.forEach( child => {
       if ( evaluator( child.referencedObject )) {

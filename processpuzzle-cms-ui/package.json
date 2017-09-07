@@ -7,6 +7,7 @@
     "start": "ng serve",
     "test": "ng test --single-run --code-coverage",
     "test-watch": "ng test --browsers Chrome",
+    "test-watch-c9": "ng test --config karma.c9.js",
     "lint": "ng lint --type-check --format json > target/issues.json",
     "lint-watch": "ng lint --type-check",
     "e2e": "ng e2e",

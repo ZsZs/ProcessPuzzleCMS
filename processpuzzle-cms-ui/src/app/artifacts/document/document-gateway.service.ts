@@ -10,7 +10,7 @@ export class DocumentGateway {
   protected headers = new Headers({'Content-Type': 'application/json'});
   private readonly serviceProperties = 'documentService';
   private resourcePath = 'documents';
-  private urlBuilder = new UrlBuilder( this.serviceProperties, this.resourcePath );
+  private readonly _urlBuilder = new UrlBuilder( this.serviceProperties, this.resourcePath );
 
   constructor( protected http: HttpClient, protected jsonMapper: JsonMapper ) {}
 
@@ -25,28 +25,31 @@ export class DocumentGateway {
     formData.append('file', file );
     formData.append('document', jsonDocument );
 
-    const url = this.urlBuilder.buildResourceUrl( );
+    const url = this.urlBuilder.buildResourceUrl();
     return this.http.post<Document>( url, formData );
   }
 
   public delete( id: number ): Observable<any> {
-    const url = `${ this.urlBuilder.buildResourceUrl( id.toString() )}`;
+    const url = `${ this._urlBuilder.buildResourceUrl( id.toString() )}`;
     return this.http.delete( url );
   }
 
   public findAll(): Observable<Document[]> {
-    return this.http.get<Document[]>( this.urlBuilder.buildResourceUrl( '' ))
+    return this.http.get<Document[]>( this._urlBuilder.buildResourceUrl( '' ))
   }
 
   public findById( id: number ): Observable<Document> {
-    const url = `${ this.urlBuilder.buildResourceUrl( id.toString() )}`;
+    const url = `${ this._urlBuilder.buildResourceUrl( id.toString() )}`;
     return this.http.get<Document>(url);
   }
 
   public update( document: Document ): Observable<Document> {
-    const url = `${this.urlBuilder.buildResourceUrl( document.id.toString() )}`;
+    const url = `${ this._urlBuilder.buildResourceUrl( document.id.toString() )}`;
     return this.http.put<Document>( url, document );
   }
 
   // protected, private helper methods
+  get urlBuilder(): UrlBuilder {
+    return this.urlBuilder;
+  } 
 }
