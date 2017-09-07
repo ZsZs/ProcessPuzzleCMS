@@ -11,7 +11,7 @@ import {ContentEditor} from "./content-editor";
    selector: 'pp-smart-document',
    template: `
     <div [hidden]="isVisible">
-        <template dynamic-component [componentModules]="extraModules" [componentTemplate]="extraTemplate" (dynamicComponentReady)="documentIsLoaded($event)"></template> 
+        <ng-template dynamic-component [componentModules]="extraModules" [componentTemplate]="extraTemplate" (dynamicComponentReady)="documentIsLoaded($event)"></ng-template> 
     </div>`,
    providers: [ContentEditor]
 })

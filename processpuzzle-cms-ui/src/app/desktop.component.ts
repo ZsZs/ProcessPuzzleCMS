@@ -12,13 +12,13 @@ import {SmartDocumentComponent} from './content-editor/smart-document.component'
   selector: 'pp-desktop',
   template: `
     <header>
-        <template dynamic-component [componentModules]="extraModules" *ngFor="let component of headerComponents" [componentType]="component.type" [componentContext]="component.context"></template>
+        <ng-template dynamic-component [componentModules]="extraModules" *ngFor="let component of headerComponents" [componentType]="component.type" [componentContext]="component.context"></ng-template>
     </header>
     <main>
         <router-outlet></router-outlet>
     </main>
     <footer [ngClass]="{'page-footer': isFooterVisible }">
-        <template dynamic-component [componentModules]="extraModules" *ngFor="let component of footerComponents" [componentType]="component.type" [componentContext]="component.context"></template>
+        <ng-template dynamic-component [componentModules]="extraModules" *ngFor="let component of footerComponents" [componentType]="component.type" [componentContext]="component.context"></ng-template>
     </footer>
   `,
    styles: [``]
