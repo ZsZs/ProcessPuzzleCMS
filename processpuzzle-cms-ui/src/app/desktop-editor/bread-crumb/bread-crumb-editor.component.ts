@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, EventEmitter} from '@angular/core';
+import {Component, AfterViewInit, OnInit, ViewChild, EventEmitter} from '@angular/core';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {ModalDirective} from 'ng2-bootstrap';
 import {Router} from '@angular/router';

@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterContentInit, AfterViewChecked} from '@angular/core';
+import {Component, OnDestroy, OnInit, AfterContentInit, AfterViewChecked} from '@angular/core';
 import {Desktop} from '../desktop-editor/desktop';
 import {DynamicComponentModule} from 'angular2-dynamic-component';
 import {SmartDocumentService} from './smart-document.service';

@@ -5,8 +5,8 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 
-declare const ContentTools: any;
-export const contentEditor: ContentEditor;
+declare let ContentTools: any;
+export let contentEditor: ContentEditor;
 
 @Injectable()
 export class ContentEditor {

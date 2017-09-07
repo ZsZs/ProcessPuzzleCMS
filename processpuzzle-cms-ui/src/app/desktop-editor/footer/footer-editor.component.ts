@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter} from '@angular/core';
+import {Component, AfterViewInit, OnInit, EventEmitter} from '@angular/core';
 import {Validators, FormControl, FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Desktop} from '../desktop';
