@@ -1,11 +1,12 @@
 /**
  * Created by Zsolt on 8/11/2016.
  */
-import { Injectable } from '@angular/core';
-import {Observable, Subject} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
 
-declare var ContentTools: any;
-export var contentEditor: ContentEditor;
+declare const ContentTools: any;
+export const contentEditor: ContentEditor;
 
 @Injectable()
 export class ContentEditor {
@@ -15,7 +16,7 @@ export class ContentEditor {
    // constructors
 
    // public accessors and mutators
-   announceContentChanged( content: string ){
+   announceContentChanged( content: string ) {
       this.contentChangeSource.next( content );
    }
 
@@ -30,9 +31,9 @@ export class ContentEditor {
    public saveContent( textEditEvent: any ) {
       this.editor = this;
 
-      let textEditRegions = textEditEvent.detail().regions;
+      const textEditRegions = textEditEvent.detail().regions;
 
-      if (Object.keys( textEditRegions ).length == 0) {
+      if (Object.keys( textEditRegions ).length === 0) {
          return;
       }
 
@@ -40,8 +41,8 @@ export class ContentEditor {
       this.editor.busy( true );
 
       // Collect the contents of each region into a FormData instance
-      let content:string;
-      for ( let name in textEditRegions ) {
+      let content: string;
+      for ( const name in textEditRegions ) {
          if ( textEditRegions.hasOwnProperty( name )) {
             content = textEditRegions[name];
          }
@@ -50,7 +51,7 @@ export class ContentEditor {
       // Send the update content to the server to be saved
       contentEditor.announceContentChanged( content );
       this.editor.busy( false );
-      new ContentTools.FlashUI('ok');
+      const contentTools = new ContentTools.FlashUI('ok');
    }
 
    watchContentChange(): Observable<string> {

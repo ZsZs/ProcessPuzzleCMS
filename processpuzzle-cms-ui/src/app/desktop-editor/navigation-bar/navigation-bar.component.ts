@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {ContentReference} from "./content-reference";
+import {ContentReference} from './content-reference';
 
 @Component({
   selector: 'pp-navigation-bar',
@@ -17,7 +17,7 @@ import {ContentReference} from "./content-reference";
 
 export class NavigationBarComponent implements OnInit {
   @Input() brand: string;
-  links = [ new ContentReference( "/content/home", "Home" ), new ContentReference( "/content/child-one", "Child one" ), new ContentReference( "/content/child-two", "Child two" )];
+  links = [ new ContentReference( '/content/home', 'Home' ), new ContentReference( '/content/child-one', 'Child one' ), new ContentReference( '/content/child-two', 'Child two' )];
 
   constructor() { }
 

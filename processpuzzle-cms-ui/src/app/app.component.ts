@@ -1,10 +1,10 @@
 import {Component, ViewChild} from '@angular/core';
-import {IntroComponent} from "./intro.component";
-import {DesktopEditorComponent} from "./desktop-editor.component";
-import {DesktopEditorMenuComponent} from "./desktop-editor/desktop-editor-menu.component";
-import {DesktopComponent} from "./desktop.component";
-import {DesktopComponentFactory} from "./desktop-editor/desktop-component-factory";
-import {SmartDocumentService} from "./content-editor/smart-document.service";
+import {IntroComponent} from './intro.component';
+import {DesktopEditorComponent} from './desktop-editor.component';
+import {DesktopEditorMenuComponent} from './desktop-editor/desktop-editor-menu.component';
+import {DesktopComponent} from './desktop.component';
+import {DesktopComponentFactory} from './desktop-editor/desktop-component-factory';
+import {SmartDocumentService} from './content-editor/smart-document.service';
 
 @Component({
   selector: 'pp-root',

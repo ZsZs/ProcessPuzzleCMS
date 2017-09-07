@@ -13,12 +13,12 @@ export class DesktopEditorMenuComponent implements OnInit {
   constructor() { }
 
   // public accessors and mutators
-  public hideEditor(){
-    this.modalActions.emit({action:"sideNav", params:['hide']});
+  public hideEditor() {
+    this.modalActions.emit({action: 'sideNav', params: ['hide']});
   }
 
-  public showEditor(){
-    this.modalActions.emit({action:"sideNav", params:['show']});
+  public showEditor() {
+    this.modalActions.emit({action: 'sideNav', params: ['show']});
   }
 
   ngOnInit() {

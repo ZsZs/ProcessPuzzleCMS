@@ -1,7 +1,7 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {Router} from "@angular/router";
-import {log} from "util";
-import {Desktop} from "./desktop-editor/desktop";
+import {Router} from '@angular/router';
+import {log} from 'util';
+import {Desktop} from './desktop-editor/desktop';
 
 @Component({
   selector: 'pp-intro',
@@ -19,7 +19,7 @@ export class IntroComponent implements OnInit {
   constructor( private router: Router, private desktop: Desktop ) { }
 
   // public accessors and mutators
-  showEditor(){
+  showEditor() {
     this.onShowEditor.emit( true );
   }
 

@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-footer',
+  selector: 'pp-footer',
   template: `
     <div class="footer-copyright">
       <div class="container">© {{copyrightText}}
