@@ -7,11 +7,12 @@
   <parent>
     <groupId>com.processpuzzle.cms</groupId>
     <artifactId>processpuzzle-cms-parent</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <relativePath>processpuzzle-cms-parent</relativePath>
   </parent>
 
   <modules>
+    <module>processpuzzle-cms-docker</module>
     <module>processpuzzle-cms-parent</module>
     <module>processpuzzle-cms-ui</module>
     <module>processpuzzle-cms-ui-server</module>
