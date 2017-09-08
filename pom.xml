@@ -17,6 +17,12 @@
     <module>processpuzzle-cms-ui-server</module>
   </modules>
 
+  <scm>
+    <url>https://github.com/zszs/ProcessPuzzleCMS</url>
+    <connection>scm:git:git://github.com/ZsZs/ProcessPuzzleCMS.git</connection>
+    <developerConnection>scm:git:ssh//git@github.com/ZsZs/ProcessPuzzleCMS.git</developerConnection>
+  </scm>
+
   <build>
     <plugins>
       <plugin>

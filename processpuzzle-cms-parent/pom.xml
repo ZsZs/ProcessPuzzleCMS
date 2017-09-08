@@ -54,7 +54,7 @@
     <developer>
       <id>zszs</id>
       <name>Zsolt Zsuffa</name>
-      <email>zsolt . zsuffa @ gmail.com</email>
+      <email>zsolt.zsuffa@gmail.com</email>
       <url>http://www.linkedin.com/in/zsoltzsuffa</url>
       <timezone>0</timezone>
     </developer>
@@ -64,14 +64,13 @@
   </contributors>
 
   <scm>
-    <url>https://github.com/ZsZs/FitNesseConnect</url>
-    <connection>scm:git:git://github.com/ZsZs/FitNesseConnect.git</connection>
-    <developerConnection>scm:git:ssh//git@github.com/ZsZs/FitNesseConnect.git</developerConnection>
-    <tag>fitnesse-connect-1.0.8</tag>
+    <url>https://github.com/zszs/ProcessPuzzleCMS</url>
+    <connection>scm:git:git://github.com/ZsZs/ProcessPuzzleCMS.git</connection>
+    <developerConnection>scm:git:ssh//git@github.com/ZsZs/ProcessPuzzleCMS.git</developerConnection>
   </scm>
 
   <issueManagement>
-    <url>https://github.com/ZsZs/FitNesseConnect/issues</url>
+    <url>https://github.com/ZsZs/ProcessPuzzleCMS/issues</url>
     <system>GitHub Issues</system>
   </issueManagement>
 
