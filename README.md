@@ -6,4 +6,5 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.processpuzzle.cms/processpuzzle-cms/badge.svg?style=flat-square)](https://maven-badges.herokuapp.com/maven-central/com.processpuzzle.cms/processpuzzle-cms/)
 [![Dependency Status](https://www.versioneye.com/user/projects/59b28517368b08004a06a5f5/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/59b28517368b08004a06a5f5)
 
+![ProcessPuzzle - Business Agility](https://raw.githubusercontent.com/ZsZs/ProcessPuzzleCMS/master/processpuzzle-cms-ui/src/assets/images/processpuzzle-logo-small.jpg)
 Workflow and Content Management Integration Platform
