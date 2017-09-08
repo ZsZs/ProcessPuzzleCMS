@@ -22,6 +22,13 @@
   </properties>
 
   <dependencies>
+    <!-- module dependencies -->
+    <dependency>
+      <groupId>com.processpuzzle.cms</groupId>
+      <artifactId>processpuzzle-cms-docker</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -45,7 +52,7 @@
           </execution>
         </executions>
       </plugin>
-
+<!--
       <plugin>
         <groupId>br.com.ingenieux</groupId>
         <artifactId>beanstalk-maven-plugin</artifactId>
@@ -67,13 +74,12 @@
               <goal>upload-source-bundle</goal>
               <goal>create-application-version</goal>
               <goal>update-environment</goal>
-              <!-- 
-              <goal>wait-for-environment</goal>  -->
+              <goal>wait-for-environment</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
-
+-->
     </plugins>
   </build>
   

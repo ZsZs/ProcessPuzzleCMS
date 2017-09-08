@@ -12,6 +12,7 @@
   </parent>
 
   <modules>
+    <module>processpuzzle-cms-aws</module>
     <module>processpuzzle-cms-docker</module>
     <module>processpuzzle-cms-parent</module>
     <module>processpuzzle-cms-ui</module>
