@@ -27,6 +27,7 @@
       <groupId>com.processpuzzle.cms</groupId>
       <artifactId>processpuzzle-cms-docker</artifactId>
       <version>${project.version}</version>
+      <type>pom</type>
       <scope>compile</scope>
     </dependency>
   </dependencies>
