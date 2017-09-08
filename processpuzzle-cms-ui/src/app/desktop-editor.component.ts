@@ -1,13 +1,13 @@
 import {Component, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
-import {NavigationBarService} from "./desktop-editor/navigation-bar/navigation-bar.service";
-import {DesktopEditorMenuComponent} from "./desktop-editor/desktop-editor-menu.component";
-import {Subject} from "rxjs";
+import {NavigationBarService} from './desktop-editor/navigation-bar/navigation-bar.service';
+import {DesktopEditorMenuComponent} from './desktop-editor/desktop-editor-menu.component';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'pp-desktop-editor',
   template: `
         <pp-desktop-editor-menu></pp-desktop-editor-menu>
-        <pp-intro (onShowEditor)="showEditor( $event )"></pp-intro>    
+        <pp-intro (onShowEditor)="showEditor( $event )"></pp-intro>
         <router-outlet (desktopChanged)="onDesktopChanged($event)"></router-outlet>
     `,
   providers: [NavigationBarService]
@@ -20,11 +20,11 @@ export class DesktopEditorComponent implements OnInit {
    constructor() { }
 
    // public accessors and mutators
-   onDesktopChanged( desktopTemplate ){
+   onDesktopChanged( desktopTemplate ) {
       this.desktopTemplate = desktopTemplate;
    }
 
-   showEditor( isVisible: boolean ){
+   showEditor( isVisible: boolean ) {
       this.desktopEditor.showEditor();
    }
 

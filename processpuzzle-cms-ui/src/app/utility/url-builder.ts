@@ -1,7 +1,7 @@
 import { environment } from '../../environments/environment';
 
 export class UrlBuilder {
-   constructor( private serviceProperties: string, private resourcePath: string ){}
+   constructor( private serviceProperties: string, private resourcePath: string ) {}
 
    public buildResourceUrl( subResource?: string ): string {
       let resourceUrl = environment[this.serviceProperties].protocol;

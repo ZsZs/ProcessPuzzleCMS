@@ -2,32 +2,32 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.processpuzzle.cms</groupId>
   <artifactId>processpuzzle-cms-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>ProcessPuzzle CMS - Parent</name>
   <packaging>pom</packaging>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.2.RELEASE</version>
+    <version>1.5.6.RELEASE</version>
     <relativePath />
   </parent>
 
   <properties>
-    <apache.poi.version>3.15</apache.poi.version>
-    <apache.poi-ooxml.version>3.15</apache.poi-ooxml.version>
-    <commons.lang3.version>3.5</commons.lang3.version>
+    <apache.poi.version>3.16</apache.poi.version>
+    <apache.poi-ooxml.version>3.16</apache.poi-ooxml.version>
+    <commons.lang3.version>3.6</commons.lang3.version>
     <docker.maven.plugin.version>0.19.1</docker.maven.plugin.version>
 
     <verbose>true</verbose>
 
     <fitnesse.host>9123</fitnesse.host>
-    <fitnesse.maven.plugin.version>1.6.4-RELEASE</fitnesse.maven.plugin.version>
-    <guava.version>21.0</guava.version>
+    <fitnesse.maven.plugin.version>1.6.5</fitnesse.maven.plugin.version>
+    <guava.version>23.0</guava.version>
     <java.version>1.8</java.version>
     <jacoco.maven.plugin.version>0.7.9</jacoco.maven.plugin.version>
     <maven.plugin.javadoc.version>2.10.4</maven.plugin.javadoc.version>
-    <maven.plugin.nexus.version>1.6.7</maven.plugin.nexus.version>
+    <maven.plugin.nexus.version>1.6.8</maven.plugin.nexus.version>
     <maven.plugin.source.version>3.0.1</maven.plugin.source.version>
     <node.version>v8.4.0</node.version>
     <npm.version>5.4.0</npm.version>
@@ -54,7 +54,7 @@
     <developer>
       <id>zszs</id>
       <name>Zsolt Zsuffa</name>
-      <email>zsolt . zsuffa @ gmail.com</email>
+      <email>zsolt.zsuffa@gmail.com</email>
       <url>http://www.linkedin.com/in/zsoltzsuffa</url>
       <timezone>0</timezone>
     </developer>
@@ -64,14 +64,14 @@
   </contributors>
 
   <scm>
-    <url>https://github.com/ZsZs/FitNesseConnect</url>
-    <connection>scm:git:git://github.com/ZsZs/FitNesseConnect.git</connection>
-    <developerConnection>scm:git:ssh//git@github.com/ZsZs/FitNesseConnect.git</developerConnection>
-    <tag>fitnesse-connect-1.0.8</tag>
+    <url>https://github.com/zszs/ProcessPuzzleCMS</url>
+    <connection>scm:git:git://github.com/ZsZs/ProcessPuzzleCMS.git</connection>
+    <developerConnection>scm:git:ssh//git@github.com/ZsZs/ProcessPuzzleCMS.git</developerConnection>
+    <tag>processpuzzle-cms-0.0.1</tag>
   </scm>
 
   <issueManagement>
-    <url>https://github.com/ZsZs/FitNesseConnect/issues</url>
+    <url>https://github.com/ZsZs/ProcessPuzzleCMS/issues</url>
     <system>GitHub Issues</system>
   </issueManagement>
 
@@ -243,6 +243,18 @@
             <maxErrorsToConsole>100</maxErrorsToConsole>
           </configuration>
         </plugin>
+
+        <plugin>
+          <groupId>com.github.eirslett</groupId>
+          <artifactId>frontend-maven-plugin</artifactId>
+          <version>1.5</version>
+          <configuration>
+            <nodeVersion>${node.version}</nodeVersion>
+            <npmVersion>${npm.version}</npmVersion>
+            <installDirectory>target</installDirectory>
+          </configuration>
+        </plugin>
+
       </plugins>
     </pluginManagement>
   </build>

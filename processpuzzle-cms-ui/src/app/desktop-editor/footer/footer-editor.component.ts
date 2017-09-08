@@ -1,16 +1,16 @@
-import {Component, OnInit, EventEmitter} from '@angular/core';
-import {Validators, FormControl, FormBuilder, FormGroup} from "@angular/forms";
-import {Router} from "@angular/router";
-import {Desktop} from "../desktop";
-import {NavigationBar} from "../navigation-bar/navigation-bar";
-import {MaterializeAction} from "angular2-materialize";
-import {Footer} from "./footer";
+import {Component, AfterViewInit, OnInit, EventEmitter} from '@angular/core';
+import {Validators, FormControl, FormBuilder, FormGroup} from '@angular/forms';
+import {Router} from '@angular/router';
+import {Desktop} from '../desktop';
+import {NavigationBar} from '../navigation-bar/navigation-bar';
+import {MaterializeAction} from 'angular2-materialize';
+import {Footer} from './footer';
 
 @Component({
   selector: 'pp-footer-editor',
   templateUrl: './footer-editor.component.html'
 })
-export class FooterEditorComponent implements OnInit {
+export class FooterEditorComponent implements AfterViewInit, OnInit {
   modalActions = new EventEmitter<string|MaterializeAction>();
   public footerEditForm: FormGroup;
   footer: Footer;
@@ -21,7 +21,7 @@ export class FooterEditorComponent implements OnInit {
   }
 
   // public accessors and mutators
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.openForm();
   }
 
@@ -49,8 +49,8 @@ export class FooterEditorComponent implements OnInit {
   }
 
   // protected, private helper methods
-  private closeForm(): void{
-    this.modalActions.emit({action:"modal",params:['close']});
+  private closeForm(): void {
+    this.modalActions.emit({action: 'modal', params: ['close']});
   }
 
   private initForm() {
@@ -63,8 +63,8 @@ export class FooterEditorComponent implements OnInit {
     this.router.navigate( ['../../'] );
   }
 
-  private openForm():void {
-    this.modalActions.emit({action:"modal",params:['open']});
+  private openForm(): void {
+    this.modalActions.emit({action: 'modal', params: ['open']});
   }
 
   private updateForm() {

@@ -1,16 +1,16 @@
-import {Component, OnInit, ViewChild, EventEmitter} from '@angular/core';
-import {FormControl, Validators, FormGroup, FormBuilder} from "@angular/forms";
-import {ModalDirective} from "ng2-bootstrap";
-import {Router} from "@angular/router";
-import {Desktop} from "../desktop";
-import {BreadCrumb} from "./bread-crumb";
-import {MaterializeAction} from "angular2-materialize";
+import {Component, AfterViewInit, OnInit, ViewChild, EventEmitter} from '@angular/core';
+import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
+import {ModalDirective} from 'ng2-bootstrap';
+import {Router} from '@angular/router';
+import {Desktop} from '../desktop';
+import {BreadCrumb} from './bread-crumb';
+import {MaterializeAction} from 'angular2-materialize';
 
 @Component({
   selector: 'pp-bread-crumb-editor',
   templateUrl: './bread-crumb-editor.component.html'
 })
-export class BreadCrumbEditorComponent implements OnInit {
+export class BreadCrumbEditorComponent implements AfterViewInit, OnInit {
   modalActions = new EventEmitter<string|MaterializeAction>();
   public breadCrumbEditForm: FormGroup;
   breadCrumb: BreadCrumb;
@@ -21,7 +21,7 @@ export class BreadCrumbEditorComponent implements OnInit {
   }
 
   // public accessors and mutators
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.openForm();
   }
 
@@ -49,8 +49,8 @@ export class BreadCrumbEditorComponent implements OnInit {
   }
 
   // protected, private helper methods
-  private closeForm(){
-    this.modalActions.emit({action:"modal",params:['close']});
+  private closeForm() {
+    this.modalActions.emit({action: 'modal', params: ['close']});
   }
 
   private initForm() {
@@ -63,8 +63,8 @@ export class BreadCrumbEditorComponent implements OnInit {
     this.router.navigate( ['../../'] );
   }
 
-  private openForm():void {
-  this.modalActions.emit({action:"modal",params:['open']});
+  private openForm(): void {
+  this.modalActions.emit({action: 'modal', params: ['open']});
   }
 
 

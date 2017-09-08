@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { JsonMapper } from './json-mapper';
-import { Document } from '../management/document/document';
+import { Document } from '../artifacts/document/document';
 
 describe('JSON Mapper', () => {
   const DOCUMENT_FILE_NAME = 'classpath:sampleDocuments/SplashForm.png';

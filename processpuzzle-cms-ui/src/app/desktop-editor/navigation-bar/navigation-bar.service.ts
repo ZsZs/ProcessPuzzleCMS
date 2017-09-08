@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {NavigationBar} from "./navigation-bar";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {NavigationBar} from './navigation-bar';
 import {UrlBuilder} from '../../utility/url-builder';
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 
@@ -23,7 +23,7 @@ export class NavigationBarService {
 
    // public accessors and mutators
    delete(navigationBar: NavigationBar): Observable<any> {
-      let resourceUrl = this.urlBuilder.buildResourceUrl(String(navigationBar.id));
+      const resourceUrl = this.urlBuilder.buildResourceUrl(String(navigationBar.id));
       return this.http.delete(resourceUrl);
    }
 

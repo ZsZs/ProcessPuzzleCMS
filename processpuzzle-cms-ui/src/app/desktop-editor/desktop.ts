@@ -1,8 +1,8 @@
 import {Component, OnInit, Injectable} from '@angular/core';
-import {Subject} from "rxjs";
-import {NavigationBar} from "./navigation-bar/navigation-bar";
-import {BreadCrumb} from "./bread-crumb/bread-crumb";
-import {Footer} from "./footer/footer";
+import {Subject} from 'rxjs/Subject';
+import {NavigationBar} from './navigation-bar/navigation-bar';
+import {BreadCrumb} from './bread-crumb/bread-crumb';
+import {Footer} from './footer/footer';
 
 @Injectable()
 export class Desktop {
@@ -18,44 +18,44 @@ export class Desktop {
   constructor() { }
 
   // public accessors and mutators
-  deleteBreadCrumb (){
+  deleteBreadCrumb () {
     this._breadCrumb = null;
     this.announceDesktopChanged();
   }
 
-  deleteFooter (){
+  deleteFooter () {
     this._footer = null;
     this.announceDesktopChanged();
   }
 
-  deleteNavigationBar (){
+  deleteNavigationBar () {
     this._navigationBar = null;
     this.announceDesktopChanged();
   }
 
-  hasElements (): boolean{
-    if ( this._navigationBar != null || this._footer != null || this._breadCrumb != null ){
+  hasElements (): boolean {
+    if ( this._navigationBar != null || this._footer != null || this._breadCrumb != null ) {
       return true;
     }
     return false;
   }
 
-  updateBreadCrumb ( newBreadCrumb: BreadCrumb ){
+  updateBreadCrumb ( newBreadCrumb: BreadCrumb ) {
     this._breadCrumb = newBreadCrumb;
     this.announceDesktopChanged();
   }
 
-  updateFooter ( newFooter: Footer ){
+  updateFooter ( newFooter: Footer ) {
     this._footer = newFooter;
     this.announceDesktopChanged();
   }
 
-  updateNavigationBar ( newNavigationBar: NavigationBar ){
+  updateNavigationBar ( newNavigationBar: NavigationBar ) {
     this._navigationBar = newNavigationBar;
     this.announceDesktopChanged();
   }
 
-  watchDesktopChange(){
+  watchDesktopChange() {
     return this.desktopTemplateSource.asObservable();
   }
 
@@ -65,7 +65,7 @@ export class Desktop {
   public get navigationBar(): NavigationBar { return this._navigationBar; }
 
   // protected, private helper methods
-  private announceDesktopChanged(){
+  private announceDesktopChanged() {
     this.desktopTemplateSource.next();
   }
 }

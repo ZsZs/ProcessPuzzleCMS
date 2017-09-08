@@ -1,11 +1,11 @@
 import {Component, OnInit, AfterViewInit, ViewChild, Output, EventEmitter} from '@angular/core';
-import {ModalDirective} from "ng2-bootstrap";
-import {FormBuilder, FormGroup, FormControl, Validators} from "@angular/forms";
-import {Router, ActivatedRoute} from "@angular/router";
-import {NavigationBar} from "./navigation-bar";
-import {NavigationBarService} from "./navigation-bar.service";
-import {Desktop} from "../desktop";
-import {MaterializeAction} from "angular2-materialize";
+import {ModalDirective} from 'ng2-bootstrap';
+import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
+import {Router, ActivatedRoute} from '@angular/router';
+import {NavigationBar} from './navigation-bar';
+import {NavigationBarService} from './navigation-bar.service';
+import {Desktop} from '../desktop';
+import {MaterializeAction} from 'angular2-materialize';
 
 @Component({
   selector: 'pp-navigation-bar-editor',
@@ -23,7 +23,7 @@ export class NavigationBarEditorComponent implements AfterViewInit, OnInit {
   }
 
   // public accessors and mutators
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.openForm();
   }
 
@@ -60,8 +60,8 @@ export class NavigationBarEditorComponent implements AfterViewInit, OnInit {
   }
 
   // protected, private helper methods
-  private closeForm(): void{
-    this.modalActions.emit({action:"modal",params:['close']});
+  private closeForm(): void {
+    this.modalActions.emit({action: 'modal', params: ['close']});
   }
 
   private initForm() {
@@ -71,11 +71,11 @@ export class NavigationBarEditorComponent implements AfterViewInit, OnInit {
   }
 
   private navigateBack() {
-    this.router.navigate( ['../../'] );
+    this.router.navigate(['../../']);
   }
 
-  private openForm():void {
-    this.modalActions.emit({action:"modal",params:['open']});
+  private openForm(): void {
+    this.modalActions.emit({action: 'modal', params: ['open']});
   }
 
   private updateForm() {

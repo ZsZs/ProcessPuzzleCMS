@@ -1,11 +1,11 @@
 import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {BreadCrumbComponent} from "./desktop-editor/bread-crumb/bread-crumb.component";
+import {BreadCrumbComponent} from './desktop-editor/bread-crumb/bread-crumb.component';
 import {Desktop} from './desktop-editor/desktop';
-import {NavigationBarComponent} from "./desktop-editor/navigation-bar/navigation-bar.component";
-import {DesktopComponentFactory} from "./desktop-editor/desktop-component-factory";
-import {DynamicComponentDefinition} from "./desktop-editor/dynamic-component-definition";
-import {DynamicComponentModule} from "angular2-dynamic-component";
+import {NavigationBarComponent} from './desktop-editor/navigation-bar/navigation-bar.component';
+import {DesktopComponentFactory} from './desktop-editor/desktop-component-factory';
+import {DynamicComponentDefinition} from './desktop-editor/dynamic-component-definition';
+import {DynamicComponentModule} from 'angular2-dynamic-component';
 import {SmartDocumentComponent} from './content-editor/smart-document.component';
 
 @Component({
@@ -26,8 +26,8 @@ import {SmartDocumentComponent} from './content-editor/smart-document.component'
 
 export class DesktopComponent implements OnInit {
   extraModules = [DynamicComponentModule, RouterModule];
-  private headerComponents = new Array<DynamicComponentDefinition>();
-  private footerComponents = new Array<DynamicComponentDefinition>();
+  public headerComponents = new Array<DynamicComponentDefinition>();
+  public footerComponents = new Array<DynamicComponentDefinition>();
   isFooterVisible = false;
 
   constructor( private desktop: Desktop, private desktopComponentFactory: DesktopComponentFactory ) {}
@@ -43,7 +43,7 @@ export class DesktopComponent implements OnInit {
   }
 
   // protected, private helper methods
-   checkFooterVisibility(){
+   checkFooterVisibility() {
      this.isFooterVisible = this.footerComponents.length > 0;
    }
 }

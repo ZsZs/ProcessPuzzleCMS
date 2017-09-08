@@ -2,21 +2,21 @@ sudo: required
 language: java
 jdk: oraclejdk8
 node_js:
-  - '8.4.0'
+- 8.4.0
 services:
-  - docker
+- docker
 install: true
 env:
   local:
-    maven: 
+    maven:
     - repository=$HOME/.m2
     - CXX=g++-4.8
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+    - g++-4.8
   chrome: stable
   sonarcloud:
     organization: processpuzzle
@@ -25,40 +25,38 @@ addons:
     branches:
     - development
     - master
-    - zsolt
 before_install:
-  - openssl aes-256-cbc -K $encrypted_de73b5d78a24_key -iv $encrypted_de73b5d78a24_iv -in codesigning.asc.enc -out codesigning.asc -d
-  - gpg --fast-import codesigning.asc
-  - nvm install node
-  - nvm use node
-  - npm install -g npm@5.2
-  - npm --version
+- openssl aes-256-cbc -K $encrypted_d49bee1cc322_key -iv $encrypted_d49bee1cc322_iv -in codesigning.asc.enc -out codesigning.asc -d
+- gpg --fast-import codesigning.asc
+- nvm install node
+- nvm use node
+- npm install -g npm@5.2
+- npm --version
 cache:
   directories:
   - "$HOME/.m2"
   - "$HOME/.sonar/cache"
   - "./img-web/node_modules"
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start  
-  - npm install -g typescript
-  - npm remove -g angular-cli
-  - npm uninstall -g @angular/cli
-  - npm cache clean --force
-  - npm install -g @angular/cli@latest
-  - npm install -g @angular/compiler-cli
-  - ng --version
-#  - npm install --prefix ./img-web
-  - npm update --prefix ./img-web
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
+- npm install -g typescript
+- npm remove -g angular-cli
+- npm uninstall -g @angular/cli
+- npm cache clean --force
+- npm install -g @angular/cli@latest
+- npm install -g @angular/compiler-cli
+- ng --version
+- npm update --prefix ./processpuzzle-cms-ui
 script:
-  - mvn clean install org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar
+- mvn clean install org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar
 deploy:
   provider: releases
   api_key:
     secure: XYnuZULC/Qol43bAWqH6nBzkYtjNnERQq+PppaYtcWaB9sbDJQXBj2MqLF355BFI6IA9FSsx1GLdX5R3+tAJsteWyq6Xrk7WpLDSPdOYhU3BlUCJeU35YQkZ+rPPsHfDzBghTOEH3OxqcmozlUVqvg1JyaZ2fitGBNRuGCPN6k/y7fd3jtOT6BhSPAMIKodr/B+RW+sGfjl+ffFFjFXNIOyBa7Y6LINlJdgr5mJGmVQPsUiJeuVx58nBxuzRbKoX9d/vMbeiLkuFRVqEzmcDptl1MrqcGuVwxPzuT9wCfGSMUN8X/hss74ZTbmeAZ6jjk8xo8QPlqAxr62ChkFeGKRsZhiHcLfc6J7G0+JfY+Wwx/ra3EwBz4kfdZ34HgHy1c83AfuT4zj+UByhr3EXf5Xi+UfT5BcwgvdRsZ6yFw0CtBjukC2Bc5zdrusQzmpEK+S4a8X0jdDpLsDj0oJjuoM1DVEp83TiFah9/4F3c5qYRXHRjkIF46XHivWPhJwYKpWKGo/nUpJCxX0MgCUb+r+RcuxALiARAJmj7ZdcTKNfuSpdxFR4IZjVlR40ASRWJJEMs9cOWIsIjrggVeScFB0quBL/Va2SsCar8+6JaSahQg2LKT9P5lVS6KUNoLu7E7xSkkKvrBApU3awNyd92WygmAA3mIzVCeBD+wW8TZF4=
-  file: 
-    - target/img.zip
+  file:
+  - target/img.zip
   skip_cleanup: true
   on:
     repo: ZsZs/img
