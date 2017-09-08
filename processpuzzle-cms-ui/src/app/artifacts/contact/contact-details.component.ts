@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'img-contact-details',
+  selector: 'pp-contact-details',
   templateUrl: './contact-details.component.html',
   styles: []
 })

@@ -5,10 +5,9 @@ import {DocumentGateway} from './document-gateway.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {isNullOrUndefined} from 'util';
-import {DISABLED} from '@angular/forms/src/model';
 
 @Component({
-  selector: 'img-document-details',
+  selector: 'pp-document-details',
   template: `
       <div id="document-details" class="">
           <form class="col s12" [formGroup]="dataForm" (ngSubmit)="onSubmit()">
@@ -22,7 +21,7 @@ import {DISABLED} from '@angular/forms/src/model';
               </div>
               <div class="row">
                   <div class="col s12">
-                      <img-document-image [document]="document"></img-document-image>
+                      <pp-document-image [document]="document"></pp-document-image>
                   </div>
               </div>
               <div class="row">

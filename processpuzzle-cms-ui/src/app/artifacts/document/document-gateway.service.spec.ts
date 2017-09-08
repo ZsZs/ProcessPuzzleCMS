@@ -15,6 +15,7 @@ describe('DocumentGateway', () => {
 
   let documentGateway: DocumentGateway;
   let http: HttpTestingController;
+  let resourceUrl: string;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -25,6 +26,7 @@ describe('DocumentGateway', () => {
     documentGateway = TestBed.get( DocumentGateway );
     http = TestBed.get( HttpTestingController );
     expectedResponse = new Document( DOCUMENT_TITLE, DOCUMENT_FILE_NAME, DOCUMENT_MIME_TYPE, DOCUMENT_PATH );
+    resourceUrl = documentGateway.urlBuilder.buildResourceUrl();
   });
 
   it('health check: should be created', inject([DocumentGateway], (service: DocumentGateway) => {
@@ -39,14 +41,14 @@ describe('DocumentGateway', () => {
       expect( response ).toEqual( expectedResponse );
     });
 
-    http.expectOne( documentGateway.urlBuilder.this.urlBuilder.buildResourceUrl() ).flush( expectedResponse );
+    http.expectOne( resourceUrl ).flush( expectedResponse );
     http.verify();
   });
 
   it('delete() send DELETE to backend.', () => {
     documentGateway.delete( 1 ).subscribe( () => {});
 
-    http.expectOne( documentGateway.urlBuilder.this.urlBuilder.buildResourceUrl( '1' )).flush( {} );
+    http.expectOne( resourceUrl + '/1' ).flush( {} );
     http.verify();
   });
 
@@ -55,7 +57,7 @@ describe('DocumentGateway', () => {
       expect( response ).toEqual( [expectedResponse] );
     });
 
-    http.expectOne( documentGateway.urlBuilder.this.urlBuilder.buildResourceUrl() ).flush( [expectedResponse] );
+    http.expectOne( resourceUrl ).flush( [expectedResponse] );
     http.verify();
   });
 
@@ -64,7 +66,7 @@ describe('DocumentGateway', () => {
       expect( response ).toEqual( expectedResponse );
     });
 
-    http.expectOne( documentGateway.urlBuilder.this.urlBuilder.buildResourceUrl( '1' ) ).flush( expectedResponse );
+    http.expectOne( resourceUrl + '/1' ).flush( expectedResponse );
     http.verify();
   });
 
@@ -75,7 +77,7 @@ describe('DocumentGateway', () => {
       expect( response ).toEqual( expectedResponse );
     });
 
-    http.expectOne( documentGateway.urlBuilder.this.urlBuilder.buildResourceUrl( '1' )).flush( expectedResponse );
+    http.expectOne( resourceUrl + '/1' ).flush( expectedResponse );
     http.verify();
   });
 });

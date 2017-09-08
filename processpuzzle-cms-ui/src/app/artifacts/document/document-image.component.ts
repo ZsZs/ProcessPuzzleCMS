@@ -5,7 +5,7 @@ import {Document} from './document';
 import {isNullOrUndefined} from 'util';
 
 @Component({
-  selector: 'img-document-image',
+  selector: 'pp-document-image',
   template: `
       <div>
           <img class="materialboxed responsive-img" src="{{imageUrl()}}" *ngIf="isImage()">

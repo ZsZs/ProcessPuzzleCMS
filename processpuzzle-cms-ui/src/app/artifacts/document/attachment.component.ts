@@ -4,7 +4,7 @@ import {isNullOrUndefined} from 'util';
 import {UrlBuilder} from '../../utility/url-builder';
 
 @Component({
-  selector: 'img-attachment',
+  selector: 'pp-attachment',
   template: `
     <div class="row">
         <div class="collection">

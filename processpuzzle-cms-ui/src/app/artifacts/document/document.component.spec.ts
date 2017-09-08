@@ -7,12 +7,12 @@ import { Document } from './document';
 import { DocumentComponent } from './document.component';
 import { DocumentListComponent } from './document-list.component';
 import { DocumentGateway } from './document-gateway.service';
-import {JsonMapper} from '../../utility/json-mapper';
+import { JsonMapper } from '../../utility/json-mapper';
 
 describe('DocumentComponent', () => {
-  const DOCUMENT_FILE_NAME = 'classpath:sampleDocuments/SplashForm.png';
+  const DOCUMENT_FILE_NAME = 'SplashForm.png';
   const DOCUMENT_MIME_TYPE = 'image/png';
-  const DOCUMENT_PATH = '';
+  const DOCUMENT_PATH = 'sampleDocuments';
   const document = new Document( DOCUMENT_FILE_NAME, DOCUMENT_MIME_TYPE, DOCUMENT_PATH );
 
   let component: DocumentComponent;

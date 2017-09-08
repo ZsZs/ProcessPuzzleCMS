@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'img-document',
+  selector: 'pp-document',
   template: `
       <div>
           <h4>Documents</h4>
           <div class="row">
               <div class="col s6">
-                  <img-document-list></img-document-list>
+                  <pp-document-list></pp-document-list>
               </div>
               <div class="col s6">
                   <router-outlet></router-outlet>

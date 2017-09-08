@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'img-contact',
+  selector: 'pp-contact',
   template: `
     <p>
       contact Works!

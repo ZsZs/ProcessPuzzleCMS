@@ -22,6 +22,7 @@ describe('Document entity', () => {
   });
 
   it('properties can be read', () => {
+    expect( document.id ).toBeUndefined();
     expect( document.fileName ).toEqual( DOCUMENT_FILE_NAME );
     expect( document.path ).toEqual( DOCUMENT_PATH );
     expect( document.mimeType ).toEqual( DOCUMENT_MIME_TYPE );
@@ -32,10 +33,12 @@ describe('Document entity', () => {
     document.fileName = SOMETHING_ELSE;
     document.path = SOMETHING_ELSE;
     document.mimeType = SOMETHING_ELSE;
+    document.title = SOMETHING_ELSE;
 
     expect( document.fileName ).toEqual( SOMETHING_ELSE );
     expect( document.path ).toEqual( SOMETHING_ELSE );
     expect( document.mimeType ).toEqual( SOMETHING_ELSE );
+    expect( document.title ).toEqual( SOMETHING_ELSE );
   });
 
   it('can be serialized to JSON', () => {

@@ -50,6 +50,6 @@ export class DocumentGateway {
 
   // protected, private helper methods
   get urlBuilder(): UrlBuilder {
-    return this.urlBuilder;
-  } 
+    return this._urlBuilder;
+  }
 }
