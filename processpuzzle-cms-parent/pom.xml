@@ -17,7 +17,7 @@
     <apache.poi.version>3.16</apache.poi.version>
     <apache.poi-ooxml.version>3.16</apache.poi-ooxml.version>
     <commons.lang3.version>3.6</commons.lang3.version>
-    <docker.maven.plugin.version>0.19.1</docker.maven.plugin.version>
+    <docker.maven.plugin.version>0.22.1</docker.maven.plugin.version>
 
     <verbose>true</verbose>
 
