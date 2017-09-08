@@ -9,7 +9,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.2.RELEASE</version>
+    <version>1.5.6.RELEASE</version>
     <relativePath />
   </parent>
 
@@ -243,6 +243,18 @@
             <maxErrorsToConsole>100</maxErrorsToConsole>
           </configuration>
         </plugin>
+
+        <plugin>
+          <groupId>com.github.eirslett</groupId>
+          <artifactId>frontend-maven-plugin</artifactId>
+          <version>1.5</version>
+          <configuration>
+            <nodeVersion>${node.version}</nodeVersion>
+            <npmVersion>${npm.version}</npmVersion>
+            <installDirectory>target</installDirectory>
+          </configuration>
+        </plugin>
+
       </plugins>
     </pluginManagement>
   </build>

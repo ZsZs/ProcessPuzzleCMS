@@ -31,9 +31,9 @@ module.exports = function (config) {
       fixWebpackSourcePaths: true,
       thresholds: {
         statements: 80,
-        lines: 80,
-        branches: 60,
-        functions: 80
+        lines: 70,
+        branches: 50,
+        functions: 70
       }
     },
     angularCli: {

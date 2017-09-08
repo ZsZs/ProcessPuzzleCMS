@@ -25,7 +25,6 @@ addons:
     branches:
     - development
     - master
-    - zsolt
 before_install:
   - openssl aes-256-cbc -K $encrypted_de73b5d78a24_key -iv $encrypted_de73b5d78a24_iv -in codesigning.asc.enc -out codesigning.asc -d
   - gpg --fast-import codesigning.asc
@@ -49,8 +48,8 @@ before_script:
   - npm install -g @angular/cli@latest
   - npm install -g @angular/compiler-cli
   - ng --version
-#  - npm install --prefix ./img-web
-  - npm update --prefix ./img-web
+#  - npm install --prefix ./processpuzzle-cms-ui
+  - npm update --prefix ./processpuzzle-cms-ui
 script:
   - mvn clean install org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar
 deploy:

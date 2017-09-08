@@ -11,9 +11,21 @@
     <relativePath>../processpuzzle-cms-parent</relativePath>
   </parent>
 
+  <properties>
+    <sonar.sources>src</sonar.sources>
+    <sonar.exclusions>**/*.html, src/main.ts, src/typings.d.ts, src/app/app.*.ts, src/environments/*.ts</sonar.exclusions>
+    <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+    <sonar.tests>src</sonar.tests>
+    <sonar.test.inclusions>**/*.spec.ts</sonar.test.inclusions>
+    <sonar.typescript.tslint.configPath>tsling.json</sonar.typescript.tslint.configPath>
+    <sonar.typescript.tslint.nodePath>node_modules/tslint/bin/tslint</sonar.typescript.tslint.nodePath>
+    <sonar.typescript.tslint.outputPath>target/issues.json</sonar.typescript.tslint.outputPath>
+    <sonar.typescript.lcov.reportPaths>target/coverage/lcov.info</sonar.typescript.lcov.reportPaths>
+  </properties>
+  
   <build>
     <plugins>
-<plugin>
+      <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
         <configuration>
