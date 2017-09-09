@@ -26,7 +26,8 @@ addons:
     - development
     - master
 before_install:
-- openssl aes-256-cbc -K $encrypted_d49bee1cc322_key -iv $encrypted_d49bee1cc322_iv -in codesigning.asc.enc -out codesigning.asc -d
+- openssl aes-256-cbc -K $encrypted_d49bee1cc322_key -iv $encrypted_d49bee1cc322_iv
+  -in codesigning.asc.enc -out codesigning.asc -d
 - gpg --fast-import codesigning.asc
 - nvm install node
 - nvm use node
@@ -50,17 +51,19 @@ before_script:
 - ng --version
 - npm update --prefix ./processpuzzle-cms-ui
 script:
-- mvn clean deploy org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar --settings travis-maven-settings.xml -B
+- mvn clean deploy org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar --settings
+  travis-maven-settings.xml -B
 deploy:
+  matrix:
   - provider: elasticbeanstalk
-    access_key_id:
+    access_key_id: 
     secret_access_key:
-      secure:
-    region: eu-central-1  
+      secure: 
+    region: eu-central-1
     app: ProcessPuzzle-CMS
     env: prod-env
     bucket_name: processpuzzle-cms
-    zip_file: ./processpuzzle-cms-aws/target/processpuzzle-cms.zip
+    zip_file: "./processpuzzle-cms-aws/target/processpuzzle-cms.zip"
     skip_cleanup: true
   - provider: releases
     api_key:
@@ -71,3 +74,5 @@ deploy:
     on:
       repo: ZsZs/ProcessPuzzleCMS
       tags: true
+  secret_access_key:
+    secure: oX+pp2+eLGk+oLlpBel+4hiJZd7gmPNfFepUBAHajfZTGL6Y/l1g6f4Un5rh+Y22OPiOVhdtAk4xsgzgfzmp4Vfzg6rgdt5TeJWoJ4c2oqXkR5xcDsMJ2Dm5UeHOy+MMKNDaXYuhkvDabpXzEYo/GZc+Lz2xWIkPIHByGOUJG1xNQAZ1Dl63N7Eai/N3e0N0A+VvMi/5V5ELeErO4gDXlSKeuTxaQmU+qkN9MzTN60e8cXByiSZoUoQFAVujqejukzCMPyy3AOHzDqQ3Dgs8xCM9eAjiPYeII7BwsPXDqExjZdKua8T6oBf1aRlHwY2udBcoSyWQidXT4bN6btxxBOmVTepmuDbw7QMF9ysokpBD0oME/7Ef7Eok5oEvfRSMlssCccLZ/rlQMiNmygtGn9pmoim3O9bnzA1q4ceDsO/vzl98bHvRvZ+xH1TwDH8czHwl1x4PQHPdT54ZOy0z2jpsEbhunqqU0UNcWXCYtZIPDdgl9UjW5y39mrtWHdDXs2Fel35BR2zG+qqy7gsIwE539dcteIGkrqQNvNg2Dy1v7Lcw9wfyNkaFedpP+bEWSp7ajLHmW6ndyp/POUhfktpsPdii7XdbHVkkgPHbJsfpj2zTCJRIOr4JxCQA5TLFmo8NR91xS5veUYu1bg0v3LSD5z8cEpJ97xJ5ymaNfIE=
