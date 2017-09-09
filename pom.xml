@@ -7,7 +7,7 @@
   <parent>
     <groupId>com.processpuzzle.cms</groupId>
     <artifactId>processpuzzle-cms-parent</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <relativePath>processpuzzle-cms-parent</relativePath>
   </parent>
 
@@ -23,7 +23,7 @@
     <url>https://github.com/zszs/ProcessPuzzleCMS</url>
     <connection>scm:git:git://github.com/ZsZs/ProcessPuzzleCMS.git</connection>
     <developerConnection>scm:git:ssh//git@github.com/ZsZs/ProcessPuzzleCMS.git</developerConnection>
-    <tag>processpuzzle-cms-0.0.1</tag>
+    <tag>processpuzzle-cms-0.0.2</tag>
   </scm>
 
   <build>
