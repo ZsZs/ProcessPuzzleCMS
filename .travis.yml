@@ -50,7 +50,7 @@ before_script:
 - ng --version
 - npm update --prefix ./processpuzzle-cms-ui
 script:
-- mvn clean install org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar --settings travis-maven-settings.xml -B
+- mvn clean deploy org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar --settings travis-maven-settings.xml -B
 deploy:
   - provider: elasticbeanstalk
     access_key_id:

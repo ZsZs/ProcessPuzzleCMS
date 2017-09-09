@@ -126,7 +126,7 @@
           </execution>
           <execution>
             <id>deploy</id>
-            <phase>install</phase>
+            <phase>deploy</phase>
             <goals>
               <goal>push</goal>
             </goals>
