@@ -1,4 +1,5 @@
-# ProcessPuzzle - Business Agility
+![ProcessPuzzle - Business Agility](https://raw.githubusercontent.com/ZsZs/ProcessPuzzleCMS/master/processpuzzle-cms-ui/src/assets/images/processpuzzle-logo-small.jpg)
+# - Business Agility
 [![Build Status](https://travis-ci.org/ZsZs/ProcessPuzzleCMS.svg?branch=master)](https://travis-ci.org/ZsZs/ProcessPuzzleCMS)
 [![Quality Gate](https://sonarqube.com/api/badges/gate?key=com.processpuzzle.cms:processpuzzle-cms:development)](https://sonarqube.com/dashboard/index/com.processpuzzle.fitnesse:processpuzzle-cms:development) 
 [![Code coverage ratio](https://sonarqube.com/api/badges/measure?key=com.processpuzzle.cms:processpuzzle-cms:development&metric=coverage)](https://sonarqube.com/dashboard/index/com.processpuzzle.cms:processpuzzle-cms:development) 

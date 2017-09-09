@@ -8,10 +8,10 @@
   <parent>
     <groupId>com.processpuzzle.cms</groupId>
     <artifactId>processpuzzle-cms-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2</version>
     <relativePath>../processpuzzle-cms-parent</relativePath>
   </parent>
-  
+
   <properties>
     <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
     <beanstalk.useStagingDirectory>true</beanstalk.useStagingDirectory>
@@ -22,6 +22,14 @@
   </properties>
 
   <dependencies>
+    <!-- module dependencies -->
+    <dependency>
+      <groupId>com.processpuzzle.cms</groupId>
+      <artifactId>processpuzzle-cms-docker</artifactId>
+      <version>${project.version}</version>
+      <type>pom</type>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -34,6 +42,7 @@
             <descriptor>assembly.xml</descriptor>
           </descriptors>
           <appendAssemblyId>false</appendAssemblyId>
+          <finalName>processpuzzle-cms</finalName>
         </configuration>
         <executions>
           <execution>
@@ -45,36 +54,42 @@
           </execution>
         </executions>
       </plugin>
-
-      <plugin>
-        <groupId>br.com.ingenieux</groupId>
-        <artifactId>beanstalk-maven-plugin</artifactId>
-        <version>1.5.0</version>
-        <configuration>
-          <applicationName>ProcessPuzzle-CMS</applicationName>
-          <environmentRef>prod-env</environmentRef>
-          <cnamePrefix>processpuzzle-cms</cnamePrefix>
-          <s3Bucket>processpuzzle-cms</s3Bucket>
-          <solutionStack>64bit Amazon Linux 2016.09 v2.5.0 running Docker 1.12.6</solutionStack>
-          <s3Key>${project.artifactId}/${project.build.finalName}-${maven.build.timestamp}.zip</s3Key>
-          <artifactFile>${project.build.directory}/${project.build.finalName}.zip</artifactFile>
-          <verbose>true</verbose>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>install</phase>
-            <goals>
-              <goal>upload-source-bundle</goal>
-              <goal>create-application-version</goal>
-              <goal>update-environment</goal>
-              <!-- 
-              <goal>wait-for-environment</goal>  -->
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
     </plugins>
   </build>
-  
+
+  <profiles>
+    <profile>
+      <id>aws-deploy</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>br.com.ingenieux</groupId>
+            <artifactId>beanstalk-maven-plugin</artifactId>
+            <version>1.5.0</version>
+            <configuration>
+              <applicationName>ProcessPuzzle-CMS</applicationName>
+              <environmentRef>prod-env</environmentRef>
+              <cnamePrefix>processpuzzle-cms</cnamePrefix>
+              <s3Bucket>processpuzzle-cms</s3Bucket>
+              <solutionStack>64bit Amazon Linux 2016.09 v2.5.0 running Docker 1.12.6</solutionStack>
+              <s3Key>${project.artifactId}/${project.build.finalName}-${maven.build.timestamp}.zip</s3Key>
+              <artifactFile>${project.build.directory}/${project.build.finalName}.zip</artifactFile>
+              <verbose>true</verbose>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>install</phase>
+                <goals>
+                  <goal>upload-source-bundle</goal>
+                  <goal>create-application-version</goal>
+                  <goal>update-environment</goal>
+                  <goal>wait-for-environment</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

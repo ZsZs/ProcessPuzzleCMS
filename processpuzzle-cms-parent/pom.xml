@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.processpuzzle.cms</groupId>
   <artifactId>processpuzzle-cms-parent</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <name>ProcessPuzzle CMS - Parent</name>
   <packaging>pom</packaging>
 
@@ -17,7 +17,7 @@
     <apache.poi.version>3.16</apache.poi.version>
     <apache.poi-ooxml.version>3.16</apache.poi-ooxml.version>
     <commons.lang3.version>3.6</commons.lang3.version>
-    <docker.maven.plugin.version>0.19.1</docker.maven.plugin.version>
+    <docker.maven.plugin.version>0.22.1</docker.maven.plugin.version>
 
     <verbose>true</verbose>
 
@@ -67,7 +67,7 @@
     <url>https://github.com/zszs/ProcessPuzzleCMS</url>
     <connection>scm:git:git://github.com/ZsZs/ProcessPuzzleCMS.git</connection>
     <developerConnection>scm:git:ssh//git@github.com/ZsZs/ProcessPuzzleCMS.git</developerConnection>
-    <tag>processpuzzle-cms-0.0.1</tag>
+    <tag>processpuzzle-cms-0.0.2</tag>
   </scm>
 
   <issueManagement>
@@ -77,6 +77,28 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- Module dependecies -->
+      <dependency>
+        <groupId>com.processpuzzle.cms</groupId>
+        <artifactId>processpuzzle-cms-docker</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+      </dependency>
+      
+      <dependency>
+        <groupId>com.processpuzzle.cms</groupId>
+        <artifactId>processpuzzle-cms-ui</artifactId>
+        <version>${project.version}</version>
+        <type>pom</type>
+      </dependency>
+      
+      <dependency>
+        <groupId>com.processpuzzle.cms</groupId>
+        <artifactId>processpuzzle-cms-server</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    
+      <!-- Third party libraries. -->
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
