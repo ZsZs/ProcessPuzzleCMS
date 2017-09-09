@@ -70,6 +70,7 @@ deploy:
     skip_cleanup: true
     on:
       branch: development
+      tags: false
 
   - provider: elasticbeanstalk
     access_key_id: AKIAJGCDIH623MFPRVEQ
