@@ -43,21 +43,19 @@ cache:
   - "./img-web/node_modules"
 
 before_script:
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-- sleep 3
-- npm install -g typescript
-- npm remove -g angular-cli
-- npm uninstall -g @angular/cli
-- npm cache clean --force
-- npm install -g @angular/cli@latest
-- npm install -g @angular/compiler-cli
-- ng --version
-- npm update --prefix ./processpuzzle-cms-ui
-
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3
+  - npm install -g typescript
+  - npm remove -g angular-cli
+  - npm uninstall -g @angular/cli
+  - npm cache clean --force
+  - npm install -g @angular/cli@latest
+  - npm install -g @angular/compiler-cli
+  - ng --version
+  - npm update --prefix ./processpuzzle-cms-ui
 script:
-- mvn clean deploy org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar --settings
-  travis-maven-settings.xml -B
+  - mvn clean deploy org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar --settings travis-maven-settings.xml -B
 
 deploy:
   - provider: elasticbeanstalk
