@@ -9,7 +9,7 @@
   <fileSets>
     <fileSet>
       <directory>${project.basedir}/</directory>
-      <outputDirectory>/img</outputDirectory>
+      <outputDirectory>${file.separator}processpuzzle-cms</outputDirectory>
       <includes>
         <include>start.bat</include>
         <include>stop.bat</include>
@@ -18,7 +18,7 @@
     
     <fileSet>
       <directory>${project.basedir}/processpuzzle-cms-ui-server/target</directory>
-      <outputDirectory>/processpuzzle-cms</outputDirectory>
+      <outputDirectory>${file.separator}processpuzzle-cms</outputDirectory>
       <includes>
         <include>processpuzzle-cms-ui-server.jar</include>
       </includes>
