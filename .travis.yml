@@ -70,7 +70,6 @@ deploy:
     skip_cleanup: true
     on:
       branch: development
-      tags: false
 
   - provider: elasticbeanstalk
     access_key_id: AKIAJGCDIH623MFPRVEQ
@@ -84,7 +83,6 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
-      tags: true
       
   - provider: releases
     api_key:
@@ -94,5 +92,4 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
-      tags: true
       repo: ZsZs/ProcessPuzzleCMS
