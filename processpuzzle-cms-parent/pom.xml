@@ -2,7 +2,6 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.processpuzzle.cms</groupId>
   <artifactId>processpuzzle-cms-parent</artifactId>
-  <version>0.0.2</version>
   <name>ProcessPuzzle CMS - Parent</name>
   <packaging>pom</packaging>
 
@@ -377,4 +376,5 @@
   </distributionManagement>
 
 
+  <version>0.0.3-SNAPSHOT</version>
 </project>

@@ -8,8 +8,8 @@
   <parent>
     <groupId>com.processpuzzle.cms</groupId>
     <artifactId>processpuzzle-cms-parent</artifactId>
-    <version>0.0.2</version>
     <relativePath>../processpuzzle-cms-parent</relativePath>
+    <version>0.0.3-SNAPSHOT</version>
   </parent>
 
   <properties>
