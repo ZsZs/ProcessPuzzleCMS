@@ -25,11 +25,11 @@ import { DesktopEditorMenuComponent } from './desktop-editor/desktop-editor-menu
 import { FooterComponent } from './desktop-editor/footer/footer.component';
 import { FooterEditorComponent } from './desktop-editor/footer/footer-editor.component';
 import { environment } from '../environments/environment';
+import { HttpLoggingInterceptor } from './utility/http-logging';
 import { IntroComponent } from './intro.component';
 import { NavigationBarComponent } from './desktop-editor/navigation-bar/navigation-bar.component';
 import { NavigationBarEditorComponent } from './desktop-editor/navigation-bar/navigation-bar-editor.component';
 import { SmartDocumentComponent } from './content-editor/smart-document.component';
-import {HttpLoggingInterceptor} from './utility/http-logging';
 
 @NgModule({
   declarations: [
