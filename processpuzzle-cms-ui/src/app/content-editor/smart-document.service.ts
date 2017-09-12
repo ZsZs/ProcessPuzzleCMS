@@ -1,8 +1,9 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
 import { SmartDocument } from './smart-document';
 import { UrlBuilder } from '../utility/url-builder';
-import {Http, Response, Headers} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class SmartDocumentService {
@@ -12,7 +13,7 @@ export class SmartDocumentService {
   private urlBuilder = new UrlBuilder( SmartDocumentService.serviceProperties, this.resourcePath );
 
   // constructors
-  constructor( private http: Http ) {
+  constructor( private http: HttpClient ) {
     this.documents['home'] = new SmartDocument( '<h1>Home page</h1><p>Some text.</p>' );
     this.documents['child-one'] = new SmartDocument( '<h1>Child page one</h1>' );
     this.documents['child-two'] = new SmartDocument( '<h1>Child page two</h1>' );
@@ -20,9 +21,7 @@ export class SmartDocumentService {
 
   // public accessors and mutators
   loadDocument ( path: string ): Observable<SmartDocument> {
-    return this.http.get( this.urlBuilder.buildResourceUrl( path )).map(
-       ( response: Response ) => response.json()
-    );
+    return this.http.get<SmartDocument>( this.urlBuilder.buildResourceUrl( path ));
   }
 
   saveDocument ( document: SmartDocument ): Observable<SmartDocument> {
@@ -37,14 +36,10 @@ export class SmartDocumentService {
 
   // protected, private helper methods
   addNewDocument ( body, headers ): Observable<SmartDocument> {
-    return this.http.post( this.urlBuilder.buildResourceUrl(), body, { headers: headers } ).map(
-       (response: Response) => response.json()
-    );
+    return this.http.post<SmartDocument>( this.urlBuilder.buildResourceUrl(), body, { headers: headers } );
   }
 
   updateDocument ( body, headers ): Observable<SmartDocument> {
-    return this.http.put(  this.urlBuilder.buildResourceUrl(), body, { headers: headers } ).map(
-       (response: Response) => response.json()
-    );
+    return this.http.put<SmartDocument>(  this.urlBuilder.buildResourceUrl(), body, { headers: headers } );
   }
 }

@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn teal waves-effect" [disabled]="!footerEditForm.valid" (click)="onSubmit()">Save</button>
+      <button class="btn teal waves-effect" type="submit" [disabled]="!footerEditForm.valid">Save</button>
       <button class="btn red waves-effect" (click)="onDelete()">Delete</button>
       <button class="btn lime  waves-effect" (click)="onCancel()">Cancel</button>
     </div>

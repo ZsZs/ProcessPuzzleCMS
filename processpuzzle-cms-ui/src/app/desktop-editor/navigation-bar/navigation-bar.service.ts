@@ -10,7 +10,6 @@ export class NavigationBarService {
    public static readonly SERVICE_PROPERTIES = 'navigationBarService';
    public static readonly RESOURCE_PATH = 'navigationbars.json';
    private headers: HttpHeaders = new HttpHeaders();
-   private navigationbar: FirebaseObjectObservable<NavigationBar>;
    private navigationbars: FirebaseListObservable<NavigationBar[]>;
    private urlBuilder = new UrlBuilder(NavigationBarService.SERVICE_PROPERTIES, NavigationBarService.RESOURCE_PATH);
 

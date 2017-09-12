@@ -1,13 +1,12 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Router} from '@angular/router';
-import {log} from 'util';
 import {Desktop} from './desktop-editor/desktop';
 
 @Component({
   selector: 'pp-intro',
   templateUrl: './intro.component.html',
   styles: [
-    `.backgroundImage { background-image: url( './assets/images/intro-background.jpg' ); background-repeat: no-repeat; background-size: cover; width: 100%; height: 100% }`
+    `.backgroundImage { background-image: url( '../assets/images/intro-background.jpg' ); background-repeat: no-repeat; background-size: cover; width: 100%; height: 100% }`
   ]
 })
 

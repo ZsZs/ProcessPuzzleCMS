@@ -1,9 +1,10 @@
 import {Component, AfterViewInit, OnInit, EventEmitter} from '@angular/core';
 import {Validators, FormControl, FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import {Desktop} from '../desktop';
-import {NavigationBar} from '../navigation-bar/navigation-bar';
+import {isNullOrUndefined} from 'util';
 import {MaterializeAction} from 'angular2-materialize';
+
+import {Desktop} from '../desktop';
 import {Footer} from './footer';
 
 @Component({
@@ -16,17 +17,17 @@ export class FooterEditorComponent implements AfterViewInit, OnInit {
   footer: Footer;
 
   // constructors
-  constructor( private router: Router, private formBuilder: FormBuilder, private desktop: Desktop ) {
-    this.footer = desktop.footer;
-  }
+  constructor( private router: Router, private formBuilder: FormBuilder, private desktop: Desktop ) {}
 
   // public accessors and mutators
+
+  // event handling methods
   ngAfterViewInit() {
     this.openForm();
   }
 
   ngOnInit() {
-    this.footer = this.desktop.footer;
+    this.footer = isNullOrUndefined( this.desktop.footer ) ? new Footer() : this.desktop.footer;
     this.initForm();
   }
 
@@ -42,7 +43,7 @@ export class FooterEditorComponent implements AfterViewInit, OnInit {
   }
 
   onSubmit() {
-    this.footer = this.footerEditForm.value;
+    this.saveForm();
     this.desktop.updateFooter( this.footer );
     this.closeForm();
     this.navigateBack();
@@ -65,6 +66,10 @@ export class FooterEditorComponent implements AfterViewInit, OnInit {
 
   private openForm(): void {
     this.modalActions.emit({action: 'modal', params: ['open']});
+  }
+
+  private saveForm() {
+     this.footer.copyrightText = this.footerEditForm.controls['copyrightText'].value;
   }
 
   private updateForm() {

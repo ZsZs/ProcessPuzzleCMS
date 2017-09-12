@@ -1,9 +1,10 @@
-import {Component, OnDestroy, OnInit, AfterContentInit, AfterViewChecked} from '@angular/core';
-import {Desktop} from '../desktop-editor/desktop';
+import {Component, OnDestroy, OnInit, AfterViewChecked} from '@angular/core';
 import {DynamicComponentModule} from 'angular2-dynamic-component';
-import {SmartDocumentService} from './smart-document.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
+
+import {Desktop} from '../desktop-editor/desktop';
+import {SmartDocumentService} from './smart-document.service';
 import {SmartDocument} from './smart-document';
 import {ContentEditor} from './content-editor';
 
