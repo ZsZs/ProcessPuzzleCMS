@@ -3,15 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 // Third party components
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { DynamicComponentModule } from 'angular2-dynamic-component/index';
 import { MaterializeModule } from 'angular2-materialize';
 import { ModalModule, BsDropdownModule } from 'ng2-bootstrap';
+import { NgxDynamicTemplateModule } from 'ngx-dynamic-template';
 
 // ProcessPuzzle components
 import { AppComponent } from './app.component';
@@ -52,8 +53,8 @@ import { SmartDocumentComponent } from './content-editor/smart-document.componen
     AngularFireAuthModule,
     BrowserModule,
     BsDropdownModule.forRoot(),
-    DynamicComponentModule,
     FormsModule,
+    HttpModule,
     HttpClientModule,
     MaterializeModule,
     ModalModule.forRoot(),

@@ -1,7 +1,9 @@
 import {Component, OnDestroy, OnInit, AfterViewChecked} from '@angular/core';
-import {DynamicComponentModule} from 'angular2-dynamic-component';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
+
+import { Response, Headers, RequestOptionsArgs } from '@angular/http';
+import { IDynamicRemoteTemplateFactory } from 'ngx-dynamic-template';
 
 import {Desktop} from '../desktop-editor/desktop';
 import {SmartDocumentService} from './smart-document.service';
@@ -12,7 +14,9 @@ import {ContentEditor} from './content-editor';
    selector: 'pp-smart-document',
    template: `
     <div [hidden]="isVisible">
-        <ng-template dynamic-component [componentModules]="extraModules" [componentTemplate]="extraTemplate" (dynamicComponentReady)="documentIsLoaded($event)"></ng-template>
+    <!--
+        <ng-template dynamic-template [componentTemplate]="extraTemplate" (dynamicComponentReady)="documentIsLoaded($event)"></ng-template>
+    -->
     </div>`,
    providers: [ContentEditor]
 })
@@ -21,7 +25,6 @@ export class SmartDocumentComponent implements AfterViewChecked, OnDestroy, OnIn
    document: SmartDocument;
    documentName: string;
    extraTemplate: string;
-   extraModules = [DynamicComponentModule];
    isVisible: boolean;
    routeSubscription: Subscription;
 

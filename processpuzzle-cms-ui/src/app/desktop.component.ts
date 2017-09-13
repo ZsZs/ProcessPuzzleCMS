@@ -1,29 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { Component, Inject, OnInit } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { Response, Headers, RequestOptionsArgs } from '@angular/http';
+import { IDynamicRemoteTemplateFactory } from 'ngx-dynamic-template';
+
 import {Desktop} from './desktop-editor/desktop';
 import {DesktopComponentFactory} from './desktop-editor/desktop-component-factory';
 import {DynamicComponentDefinition} from './desktop-editor/dynamic-component-definition';
-import {DynamicComponentModule} from 'angular2-dynamic-component';
 import {SmartDocumentComponent} from './content-editor/smart-document.component';
 
 @Component({
   selector: 'pp-desktop',
-  template: `
-    <header>
-        <ng-template dynamic-component [componentModules]="extraModules" *ngFor="let component of headerComponents" [componentType]="component.type" [componentContext]="component.context"></ng-template>
-    </header>
-    <main>
-        <router-outlet></router-outlet>
-    </main>
-    <footer [ngClass]="{'page-footer': isFooterVisible }">
-        <ng-template dynamic-component [componentModules]="extraModules" *ngFor="let component of footerComponents" [componentType]="component.type" [componentContext]="component.context"></ng-template>
-    </footer>
-  `,
-   styles: [``]
+  templateUrl: './desktop.component.html',
+  styles: [``]
 })
 
 export class DesktopComponent implements OnInit {
-  extraModules = [DynamicComponentModule, RouterModule];
+  extraModules = [RouterModule];
   public headerComponents = new Array<DynamicComponentDefinition>();
   public footerComponents = new Array<DynamicComponentDefinition>();
   isFooterVisible = false;
@@ -34,7 +27,7 @@ export class DesktopComponent implements OnInit {
     this.desktop.watchDesktopChange().subscribe(
        ( ) => {
          this.headerComponents = this.desktopComponentFactory.generateHeaderComponents( this.desktop );
-//         this.footerComponents = this.desktopComponentFactory.generateFooterComponents( this.desktop );
+         this.footerComponents = this.desktopComponentFactory.generateFooterComponents( this.desktop );
          this.checkFooterVisibility();
        }
     )
