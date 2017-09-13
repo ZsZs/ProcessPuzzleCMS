@@ -7,9 +7,9 @@ import { RouterModule } from '@angular/router';
 
 // Third party components
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
-import { DynamicComponentModule, DynamicComponentModuleFactory } from 'angular2-dynamic-component/index';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { DynamicComponentModule } from 'angular2-dynamic-component/index';
 import { MaterializeModule } from 'angular2-materialize';
 import { ModalModule, BsDropdownModule } from 'ng2-bootstrap';
 
@@ -20,7 +20,7 @@ import { BreadCrumbComponent } from './desktop-editor/bread-crumb/bread-crumb.co
 import { BreadCrumbEditorComponent } from './desktop-editor/bread-crumb/bread-crumb-editor.component';
 import { Desktop } from './desktop-editor/desktop';
 import { DesktopComponent } from './desktop.component';
-import { DesktopEditorComponent } from './desktop-editor.component';
+import { DesktopEditorComponent } from './desktop-editor/desktop-editor.component';
 import { DesktopEditorMenuComponent } from './desktop-editor/desktop-editor-menu.component';
 import { FooterComponent } from './desktop-editor/footer/footer.component';
 import { FooterEditorComponent } from './desktop-editor/footer/footer-editor.component';

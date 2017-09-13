@@ -1,8 +1,6 @@
-import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {BreadCrumbComponent} from './desktop-editor/bread-crumb/bread-crumb.component';
 import {Desktop} from './desktop-editor/desktop';
-import {NavigationBarComponent} from './desktop-editor/navigation-bar/navigation-bar.component';
 import {DesktopComponentFactory} from './desktop-editor/desktop-component-factory';
 import {DynamicComponentDefinition} from './desktop-editor/dynamic-component-definition';
 import {DynamicComponentModule} from 'angular2-dynamic-component';
@@ -36,7 +34,7 @@ export class DesktopComponent implements OnInit {
     this.desktop.watchDesktopChange().subscribe(
        ( ) => {
          this.headerComponents = this.desktopComponentFactory.generateHeaderComponents( this.desktop );
-         this.footerComponents = this.desktopComponentFactory.generateFooterComponents( this.desktop );
+//         this.footerComponents = this.desktopComponentFactory.generateFooterComponents( this.desktop );
          this.checkFooterVisibility();
        }
     )

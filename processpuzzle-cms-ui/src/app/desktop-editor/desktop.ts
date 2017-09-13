@@ -1,5 +1,7 @@
-import {Component, OnInit, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
+import {isNullOrUndefined} from 'util';
+
 import {NavigationBar} from './navigation-bar/navigation-bar';
 import {BreadCrumb} from './bread-crumb/bread-crumb';
 import {Footer} from './footer/footer';
@@ -34,10 +36,10 @@ export class Desktop {
   }
 
   hasElements (): boolean {
-    if ( this._navigationBar != null || this._footer != null || this._breadCrumb != null ) {
-      return true;
+    if ( isNullOrUndefined( this._navigationBar ) && isNullOrUndefined( this._footer ) && isNullOrUndefined( this._breadCrumb ) ) {
+      return false;
     }
-    return false;
+    return true;
   }
 
   updateBreadCrumb ( newBreadCrumb: BreadCrumb ) {

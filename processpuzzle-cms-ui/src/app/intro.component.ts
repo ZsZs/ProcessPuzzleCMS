@@ -23,10 +23,10 @@ export class IntroComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isVisible = this.desktop.hasElements();
+    this.isVisible = !this.desktop.hasElements();
     this.desktop.watchDesktopChange().subscribe(
        ( ) => {
-         this.isVisible = this.desktop.hasElements();
+         this.isVisible = !this.desktop.hasElements();
        }
     )
   }
