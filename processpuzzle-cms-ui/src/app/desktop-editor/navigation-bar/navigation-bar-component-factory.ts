@@ -9,7 +9,7 @@ export class NavigationBarComponentFactory {
 
       if ( desktop.navigationBar ) {
          const navigationBar = desktop.navigationBar;
-         navBarDef = new DynamicComponentDefinition( NavigationBarComponent, { brand: navigationBar.brand } );
+         navBarDef = new DynamicComponentDefinition( NavigationBarComponent, '<pp-navigation-bar></pp-navigation-bar>', { brand: navigationBar.brand } );
       }
 
       return navBarDef;

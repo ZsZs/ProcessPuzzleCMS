@@ -8,7 +8,7 @@ export class FooterComponentFactory {
 
       if ( desktop.footer ) {
          const footer = desktop.footer;
-         footerDef = new DynamicComponentDefinition( FooterComponent, { copyrightText: footer.copyrightText } );
+         footerDef = new DynamicComponentDefinition( FooterComponent, '<pp-footer></pp-footer>', { copyrightText: footer.copyrightText } );
       }
 
       return footerDef;

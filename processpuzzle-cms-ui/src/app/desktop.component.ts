@@ -16,12 +16,12 @@ import {SmartDocumentComponent} from './content-editor/smart-document.component'
 })
 
 export class DesktopComponent implements OnInit {
-  extraModules = [RouterModule];
+  extraModules = [RouterModule, this.dynamicModule];
   public headerComponents = new Array<DynamicComponentDefinition>();
   public footerComponents = new Array<DynamicComponentDefinition>();
   isFooterVisible = false;
 
-  constructor( private desktop: Desktop, private desktopComponentFactory: DesktopComponentFactory ) {}
+  constructor( private desktop: Desktop, private desktopComponentFactory: DesktopComponentFactory, @Inject('DynamicModule') public dynamicModule ) {}
 
   ngOnInit() {
     this.desktop.watchDesktopChange().subscribe(

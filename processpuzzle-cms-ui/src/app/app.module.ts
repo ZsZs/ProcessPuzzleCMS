@@ -32,6 +32,8 @@ import { NavigationBarComponent } from './desktop-editor/navigation-bar/navigati
 import { NavigationBarEditorComponent } from './desktop-editor/navigation-bar/navigation-bar-editor.component';
 import { SmartDocumentComponent } from './content-editor/smart-document.component';
 
+const DynamicTemplateModule = NgxDynamicTemplateModule.forRoot({ routes: APP_ROUTES });
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +55,7 @@ import { SmartDocumentComponent } from './content-editor/smart-document.componen
     AngularFireAuthModule,
     BrowserModule,
     BsDropdownModule.forRoot(),
+    DynamicTemplateModule,
     FormsModule,
     HttpModule,
     HttpClientModule,
@@ -61,7 +64,9 @@ import { SmartDocumentComponent } from './content-editor/smart-document.componen
     ReactiveFormsModule,
     RouterModule.forRoot( APP_ROUTES )
   ],
-  providers: [Desktop, {provide: HTTP_INTERCEPTORS, useClass: HttpLoggingInterceptor, multi: true }],
+  providers: [Desktop, 
+              {provide: HTTP_INTERCEPTORS, useClass: HttpLoggingInterceptor, multi: true }, 
+              {provide: 'DynamicModule', useValue: DynamicTemplateModule} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
