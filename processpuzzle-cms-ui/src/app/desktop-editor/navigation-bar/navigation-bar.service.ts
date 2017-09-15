@@ -3,19 +3,17 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {NavigationBar} from './navigation-bar';
 import {UrlBuilder} from '../../utility/url-builder';
-import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
+import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 @Injectable()
 export class NavigationBarService {
    public static readonly SERVICE_PROPERTIES = 'navigationBarService';
    public static readonly RESOURCE_PATH = 'navigationbars.json';
    private headers: HttpHeaders = new HttpHeaders();
-   private navigationbars: FirebaseListObservable<NavigationBar[]>;
    private urlBuilder = new UrlBuilder(NavigationBarService.SERVICE_PROPERTIES, NavigationBarService.RESOURCE_PATH);
 
    // constructors
    constructor(private http: HttpClient, private database: AngularFireDatabase) {
-      this.navigationbars = database.list(NavigationBarService.RESOURCE_PATH);
       this.headers.set('Content-Type', 'application/json');
       this.headers.set('Access-Control-Allow-Origin', '*');
    }

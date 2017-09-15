@@ -1,4 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
+import { Desktop } from '../desktop';
 
 @Component({
   selector: 'pp-footer',
@@ -14,9 +15,10 @@ import {Component, OnInit, Input} from '@angular/core';
 export class FooterComponent implements OnInit {
   @Input() copyrightText: string;
 
-  constructor() { }
+  constructor( private desktop: Desktop ) { }
 
   ngOnInit() {
+    this.copyrightText = this.desktop.footer.copyrightText;
   }
 
 }

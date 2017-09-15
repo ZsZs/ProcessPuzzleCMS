@@ -5,13 +5,14 @@ import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 
+const contentToolsEditor  = require( 'ContentEdit' );
 declare let ContentTools: any;
 export let contentEditor: ContentEditor;
 
 @Injectable()
 export class ContentEditor {
    private contentChangeSource = new Subject<string>();
-   private editor = ContentTools.EditorApp.get();
+   private editor = contentToolsEditor;
 
    // constructors
 

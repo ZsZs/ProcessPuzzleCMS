@@ -5,10 +5,7 @@
     <router-outlet></router-outlet>
 </main>
 <footer [ngClass]="{'page-footer': isFooterVisible }">
-    <ng-template dynamic-template [template]="'<span style=\'color: orange;\'>This is simple dynamic template</span>'"></ng-template>
-    <ng-template dynamic-template [template]="'<pp-footer></pp-footer>'"  [extraModules]="'extraModules'"></ng-template>
-    <!--
-    <ng-template dynamic-template *ngFor="let component of footerComponents" [template]="component.selector"></ng-template>
-    -->
+    <ng-template dynamic-template *ngFor="let component of headerComponents" [template]="component.selector" [extraModules]="extraModules"></ng-template>
+    <ng-template dynamic-template *ngFor="let component of footerComponents" [template]="component.selector" [extraModules]="extraModules" [context]="desktop"></ng-template>
 </footer>
   

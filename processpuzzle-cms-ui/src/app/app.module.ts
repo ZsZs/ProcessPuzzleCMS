@@ -17,19 +17,17 @@ import { NgxDynamicTemplateModule } from 'ngx-dynamic-template';
 // ProcessPuzzle components
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routing';
-import { BreadCrumbComponent } from './desktop-editor/bread-crumb/bread-crumb.component';
 import { BreadCrumbEditorComponent } from './desktop-editor/bread-crumb/bread-crumb-editor.component';
 import { Desktop } from './desktop-editor/desktop';
 import { DesktopComponent } from './desktop.component';
 import { DesktopEditorComponent } from './desktop-editor/desktop-editor.component';
 import { DesktopEditorMenuComponent } from './desktop-editor/desktop-editor-menu.component';
-import { FooterComponent } from './desktop-editor/footer/footer.component';
 import { FooterEditorComponent } from './desktop-editor/footer/footer-editor.component';
 import { environment } from '../environments/environment';
 import { HttpLoggingInterceptor } from './utility/http-logging';
 import { IntroComponent } from './intro.component';
-import { NavigationBarComponent } from './desktop-editor/navigation-bar/navigation-bar.component';
 import { NavigationBarEditorComponent } from './desktop-editor/navigation-bar/navigation-bar-editor.component';
+import { NavigationBarService } from './desktop-editor/navigation-bar/navigation-bar.service';
 import { SmartDocumentComponent } from './content-editor/smart-document.component';
 
 const DynamicTemplateModule = NgxDynamicTemplateModule.forRoot({ routes: APP_ROUTES });
@@ -41,11 +39,8 @@ const DynamicTemplateModule = NgxDynamicTemplateModule.forRoot({ routes: APP_ROU
     DesktopEditorComponent,
     DesktopEditorMenuComponent,
     NavigationBarEditorComponent,
-    NavigationBarComponent,
-    BreadCrumbComponent,
     BreadCrumbEditorComponent,
     IntroComponent,
-    FooterComponent,
     FooterEditorComponent,
     SmartDocumentComponent
   ],
@@ -64,9 +59,10 @@ const DynamicTemplateModule = NgxDynamicTemplateModule.forRoot({ routes: APP_ROU
     ReactiveFormsModule,
     RouterModule.forRoot( APP_ROUTES )
   ],
-  providers: [Desktop, 
-              {provide: HTTP_INTERCEPTORS, useClass: HttpLoggingInterceptor, multi: true }, 
-              {provide: 'DynamicModule', useValue: DynamicTemplateModule} ],
+  providers: [Desktop,
+             {provide: HTTP_INTERCEPTORS, useClass: HttpLoggingInterceptor, multi: true },
+             {provide: 'DynamicModule', useValue: DynamicTemplateModule},
+              NavigationBarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

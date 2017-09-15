@@ -1,13 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
-import { Response, Headers, RequestOptionsArgs } from '@angular/http';
-import { IDynamicRemoteTemplateFactory } from 'ngx-dynamic-template';
-
-import {Desktop} from './desktop-editor/desktop';
-import {DesktopComponentFactory} from './desktop-editor/desktop-component-factory';
-import {DynamicComponentDefinition} from './desktop-editor/dynamic-component-definition';
-import {SmartDocumentComponent} from './content-editor/smart-document.component';
+import { Desktop } from './desktop-editor/desktop';
+import { DesktopComponentFactory } from './desktop-editor/desktop-component-factory';
+import { DynamicComponentDefinition } from './desktop-editor/dynamic-component-definition';
+import { SmartDocumentComponent } from './content-editor/smart-document.component';
+import { DesktopModule } from './desktop-editor/desktop.module';
 
 @Component({
   selector: 'pp-desktop',
@@ -16,12 +14,12 @@ import {SmartDocumentComponent} from './content-editor/smart-document.component'
 })
 
 export class DesktopComponent implements OnInit {
-  extraModules = [RouterModule, this.dynamicModule];
+  extraModules = [DesktopModule];
   public headerComponents = new Array<DynamicComponentDefinition>();
   public footerComponents = new Array<DynamicComponentDefinition>();
   isFooterVisible = false;
 
-  constructor( private desktop: Desktop, private desktopComponentFactory: DesktopComponentFactory, @Inject('DynamicModule') public dynamicModule ) {}
+  constructor( public desktop: Desktop, private desktopComponentFactory: DesktopComponentFactory, @Inject('DynamicModule') public dynamicModule ) {}
 
   ngOnInit() {
     this.desktop.watchDesktopChange().subscribe(

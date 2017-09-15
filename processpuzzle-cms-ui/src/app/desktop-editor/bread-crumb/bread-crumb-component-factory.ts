@@ -8,7 +8,7 @@ export class BreadCrumbComponentFactory {
 
       if ( desktop.breadCrumb ) {
          const breadCrumb = desktop.breadCrumb;
-         breadCrumbDef = new DynamicComponentDefinition( BreadCrumbComponent, '<pp-bread-crumb></pp-bread-crumb>', { items: breadCrumb.items } );
+         breadCrumbDef = new DynamicComponentDefinition( BreadCrumbComponent, '<pp-bread-crumb></pp-bread-crumb>', {} );
       }
 
       return breadCrumbDef;
